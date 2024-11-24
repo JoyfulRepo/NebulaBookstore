@@ -26,7 +26,7 @@ public class PublisherService {
         return publisherRepository.findById(id);
     }
 
-    public Optional<Publisher> findByName(String name) {
+    public List<Publisher> findByName(String name) {
         return publisherRepository.findByName(name);
     }
 
@@ -35,16 +35,6 @@ public class PublisherService {
         Optional<Publisher> publisherOptional = publisherRepository.findById(id);
         if (publisherOptional.isPresent()) {
             publisherRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean deleteByName(String name) {
-        Optional<Publisher> publisherOptional = publisherRepository.findByName(name);
-        if (publisherOptional.isPresent()) {
-            publisherRepository.deleteByName(name);
             return true;
         } else {
             return false;

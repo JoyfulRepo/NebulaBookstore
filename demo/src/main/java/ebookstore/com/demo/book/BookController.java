@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ebookstore.com.demo.book.Book.BookStatus;
+
 @RestController
 @RequestMapping("/books")
 public class BookController {
@@ -43,16 +45,6 @@ public class BookController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @DeleteMapping("/title/{title}")
-    public ResponseEntity<Void> deleteBookByTitle(@PathVariable String title) {
-        boolean isDeleted = bookService.deleteByTitle(title);
-        if (isDeleted)
-            return ResponseEntity.noContent().build();
-        else
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
-    }
-
     // Get
     @GetMapping("/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Long id) {
@@ -62,10 +54,12 @@ public class BookController {
     }
 
     @GetMapping("/title/{title}")
-    public ResponseEntity<Book> getBookByTitle(@PathVariable String title) {
-        return bookService.findByTitle(title)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+    public ResponseEntity<List<Book>> getBookByTitle(@PathVariable String title) {
+        List<Book> books = bookService.findByTitle(title);
+        if (books.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(books);
     }
 
     // Update

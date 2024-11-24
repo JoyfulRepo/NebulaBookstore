@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ebookstore.com.demo.book.Book.BookStatus;
+
 @Service
 public class BookService {
 
@@ -26,7 +28,7 @@ public class BookService {
         return bookRepository.findById(id);
     }
 
-    public Optional<Book> findByTitle(String title) {
+    public List<Book> findByTitle(String title) {
         return bookRepository.findByTitle(title);
     }
 
@@ -35,16 +37,6 @@ public class BookService {
         Optional<Book> bookOptional = bookRepository.findById(id);
         if (bookOptional.isPresent()) {
             bookRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean deleteByTitle(String title) {
-        Optional<Book> bookOptional = bookRepository.findByTitle(title);
-        if (bookOptional.isPresent()) {
-            bookRepository.deleteByTitle(title);
             return true;
         } else {
             return false;

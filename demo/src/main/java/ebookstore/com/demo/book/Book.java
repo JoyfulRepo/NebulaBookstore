@@ -148,4 +148,11 @@ public class Book {
     public void setBriefDescription(String briefDescription) {
         this.briefDescription = briefDescription;
     }
+
+    public enum BookStatus {
+        AVAILABLE,
+        OUT_OF_STOCK,
+        DISCONTINUED,
+        UPCOMING
+    }
 }

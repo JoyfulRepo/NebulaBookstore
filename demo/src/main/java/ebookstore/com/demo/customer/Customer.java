@@ -152,4 +152,10 @@ public class Customer {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public enum CustomerGender {
+        MALE,
+        FEMALE,
+        OTHER
+    }
 }

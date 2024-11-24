@@ -26,7 +26,7 @@ public class AuthorService {
         return authorRepository.findById(id);
     }
 
-    public Optional<Author> findByName(String name) {
+    public List<Author> findByName(String name) {
         return authorRepository.findByName(name);
     }
 
@@ -35,16 +35,6 @@ public class AuthorService {
         Optional<Author> authorOptional = authorRepository.findById(id);
         if (authorOptional.isPresent()) {
             authorRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean deleteByName(String name) {
-        Optional<Author> authorOptional = authorRepository.findByName(name);
-        if (authorOptional.isPresent()) {
-            authorRepository.deleteByName(name);
             return true;
         } else {
             return false;

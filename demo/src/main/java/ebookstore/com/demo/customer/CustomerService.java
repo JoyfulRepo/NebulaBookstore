@@ -32,11 +32,11 @@ public class CustomerService {
         return customerRepository.findById(id);
     }
 
-    public Optional<Customer> findByName(String name) {
+    public List<Customer> findByName(String name) {
         return customerRepository.findByName(name);
     }
 
-    public Optional<Customer> findByJoinDate(LocalDate joinDate) {
+    public List<Customer> findByJoinDate(LocalDate joinDate) {
         return customerRepository.findByJoinDate(joinDate);
     }
 
@@ -45,26 +45,6 @@ public class CustomerService {
         Optional<Customer> customerOptional = customerRepository.findById(id);
         if (customerOptional.isPresent()) {
             customerRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean deleteByName(String name) {
-        Optional<Customer> customerOptional = customerRepository.findByName(name);
-        if (customerOptional.isPresent()) {
-            customerRepository.deleteByName(name);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean deleteByJoinDate(LocalDate joinDate) {
-        Optional<Customer> customerOptional = customerRepository.findByJoinDate(joinDate);
-        if (customerOptional.isPresent()) {
-            customerRepository.deleteByJoinDate(joinDate);
             return true;
         } else {
             return false;

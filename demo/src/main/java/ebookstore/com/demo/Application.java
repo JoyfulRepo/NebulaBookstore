@@ -10,7 +10,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import ebookstore.com.demo.book.*;
+import ebookstore.com.demo.book.Book.BookStatus;
 import ebookstore.com.demo.customer.*;
+import ebookstore.com.demo.customer.Customer.CustomerGender;
 
 @SpringBootApplication
 @RestController

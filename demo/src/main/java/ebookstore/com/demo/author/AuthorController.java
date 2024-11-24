@@ -43,15 +43,6 @@ public class AuthorController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @DeleteMapping("/name/{name}")
-    public ResponseEntity<Void> deleteAuthorByName(@PathVariable String name) {
-        boolean isDeleted = authorService.deleteByName(name);
-        if (isDeleted)
-            return ResponseEntity.noContent().build();
-        else
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    }
-
     // Get
     @GetMapping("/{id}")
     public ResponseEntity<Author> getAuthorById(@PathVariable Long id) {
@@ -61,10 +52,12 @@ public class AuthorController {
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<Author> getAuthorByName(@PathVariable String name) {
-        return authorService.findByName(name)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+    public ResponseEntity<List<Author>> getAuthorByName(@PathVariable String name) {
+        List<Author> authors = authorService.findByName(name);
+        if (authors.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(authors);
     }
 
     // Update
