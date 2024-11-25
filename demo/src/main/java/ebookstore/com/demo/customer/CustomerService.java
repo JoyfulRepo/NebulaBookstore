@@ -1,6 +1,5 @@
 package ebookstore.com.demo.customer;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,10 +33,6 @@ public class CustomerService {
 
     public List<Customer> findByName(String name) {
         return customerRepository.findByName(name);
-    }
-
-    public List<Customer> findByJoinDate(LocalDate joinDate) {
-        return customerRepository.findByJoinDate(joinDate);
     }
 
     // Delete
