@@ -1,0 +1,5 @@
+{
+  "java.compile.nullAnalysis.mode": "automatic",
+  "cSpell.words": ["ebookstore", "springframework"],
+  "java.configuration.updateBuildConfiguration": "automatic"
+}
