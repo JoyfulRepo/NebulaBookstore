@@ -1,0 +1,68 @@
+.settings-page {
+    min-height: 100vh;
+    width: 100%;
+    background-image: url('../assets/nebula-logo-wotext.svg');
+    background-color: rgba(219, 237, 243, 0.2);
+    background-attachment: fixed;
+    display: flex;
+}
+
+.sidebar{
+    width: 250px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.sp-main-content {
+    margin-top: 60px;
+    margin-left: 60px;
+    width: 1100px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.sp-logout{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    align-items: center;
+    flex-direction: row;
+    background-color: rgba(219, 237, 243, 0.75);
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.logout-txt{
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
+    margin: 0;
+    padding: 10px;
+    padding-left: 20px;
+}
+
+.logout-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #404B69;
+    padding: 5px;
+    border-radius: 8px;
+    margin-left: 832px;
+    text-decoration: none;
+}
+
+.see-again-prompt{
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #DBEDF3;
+    padding-left: 5px;
+}

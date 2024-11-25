@@ -1,0 +1,77 @@
+.cus-create-acc-page {
+    background-image: url('../assets/nebula-logo-wotext.svg');
+    background-color: rgba(219, 237, 243, 0.2);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cus-cracc-store-name {
+    width: 100%;
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.customer-createacc-info-box {
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    height: fit-content;
+    background-color: #404B69;
+    align-items: center;
+    margin-top: 70px;
+    border-radius: 12px;
+    gap: 10px;
+}
+
+.create-acc-prompt {
+    font-family: 'Poppins', sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    padding: 10px;
+    padding-bottom: 0;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.cus-createacc-underline {
+    width: 60%;
+    height: 5px;
+    background-color: #00818A;
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+.cus-create-acc-box {
+    width: 80%;
+    text-align: left;
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: rgba(219, 237, 243, 0.5);
+    border: 1px solid rgba(219, 237, 243, 0.5);
+    border-radius: 8px;
+}
+
+#cus-create-acc-crpage-btn {
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    background-color: #00818A;
+    border: none;
+}
+
+.cus-create-acc-already {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-style: italic;
+    color: white;
+    margin: 0;
+    margin-bottom: 10px;
+}
