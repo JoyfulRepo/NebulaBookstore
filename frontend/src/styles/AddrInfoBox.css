@@ -1,0 +1,42 @@
+.addr-info-box{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: rgba(219, 237, 243, 0.75);
+    border-radius: 12px;
+    padding: 20px
+}
+
+.r-info {
+    margin-left: 20px;
+    color: rgba(165, 165, 165, 1);
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    margin-left: 40px;
+    margin-right: 200px;
+}
+
+.r-address-info {
+    margin-left: 20px;
+    color: rgba(165, 165, 165, 1);
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    margin-left: 112px;
+    margin-right: 200px;
+}
+
+.value {
+    color: #00818A;
+    font-weight: bold;
+}
+
+.u-prop {
+    margin: 0;
+    padding: 5px;
+}
+
+.modify-btns{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
