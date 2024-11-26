@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class Discount {
     private LocalDate endDate;
 
     @NotNull
+    @DecimalMin(value = "0.01", inclusive = true)
     private Double amount;
 
     public Discount() {
