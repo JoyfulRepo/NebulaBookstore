@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import ebookstore.com.demo.review.Review;
+import ebookstore.com.demo.review.ReviewService;
+
 @Service
 public class CustomerService {
 
@@ -16,10 +19,17 @@ public class CustomerService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    private ReviewService reviewService;
+
     // Add
     public Customer save(Customer customer) {
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         return customerRepository.save(customer);
+    }
+
+    public Review addReview(Long bookId, Long customerId, Integer rating, String comment) {
+        return reviewService.addReview(bookId, customerId, rating, comment);
     }
 
     // Get

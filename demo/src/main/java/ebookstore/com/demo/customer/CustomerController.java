@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ebookstore.com.demo.review.Review;
+
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
@@ -31,6 +33,17 @@ public class CustomerController {
     @PostMapping
     public Customer addCustomer(@RequestBody Customer customer) {
         return customerService.save(customer);
+    }
+
+    @PostMapping("/{customerId}/books/{bookId}/reviews")
+    public ResponseEntity<Review> addReview(@PathVariable Long customerId, @PathVariable Long bookId,
+            @RequestParam Integer rating, @RequestParam String comment) {
+        try {
+            Review review = customerService.addReview(bookId, customerId, rating, comment);
+            return ResponseEntity.status(HttpStatus.CREATED).body(review);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     // Delete
