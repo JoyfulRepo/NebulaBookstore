@@ -92,4 +92,37 @@ public class BookController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
+    // Associate Author
+    @PutMapping("/{bookId}/authors/{authorId}")
+    public ResponseEntity<Book> addAuthorToBook(@PathVariable Long bookId, @PathVariable Long authorId) {
+        try {
+            Book updatedBook = bookService.addAuthor(bookId, authorId);
+            return ResponseEntity.ok(updatedBook);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    // Associate Genre
+    @PutMapping("/{bookId}/genres/{genreId}")
+    public ResponseEntity<Book> addGenreToBook(@PathVariable Long bookId, @PathVariable Long genreId) {
+        try {
+            Book updatedBook = bookService.addGenre(bookId, genreId);
+            return ResponseEntity.ok(updatedBook);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    // Associate Publisher
+    @PutMapping("/{bookId}/publisher/{publisherId}")
+    public ResponseEntity<Book> setPublisherForBook(@PathVariable Long bookId, @PathVariable Long publisherId) {
+        try {
+            Book updatedBook = bookService.setPublisher(bookId, publisherId);
+            return ResponseEntity.ok(updatedBook);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
 }
