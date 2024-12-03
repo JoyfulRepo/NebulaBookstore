@@ -3,6 +3,7 @@ package ebookstore.com.demo.cart;
 import java.time.LocalDate;
 import java.util.List;
 
+import ebookstore.com.demo.order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,13 @@ public class CartController {
     @PostMapping
     public Cart addCart(@RequestBody Cart cart) {
         return cartService.save(cart);
+    }
+
+    @PostMapping("/{id}/cart")
+    public ResponseEntity<Order> finalizeCart(@PathVariable Long id, @RequestParam String destination,
+            @RequestParam Order.PaymentMethod paymentMethod) {
+        Order order = cartService.finalizeCart(id, destination, paymentMethod);
+        return ResponseEntity.ok(order);
     }
 
     // Delete
