@@ -1,21 +1,39 @@
 package ebookstore.com.demo.order;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import ebookstore.com.demo.book.Book;
+import ebookstore.com.demo.customer.Customer;
+import ebookstore.com.demo.discount.Discount;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Order {
 
     @Id
@@ -44,108 +62,17 @@ public class Order {
     @NotNull
     private PaymentStatus paymentStatus;
 
-    public Order() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
-    public Order(
-            LocalDate orderDate,
-            LocalDate deliveryDate,
-            String destination,
-            Double total,
-            Status status,
-            PaymentMethod paymentMethod,
-            PaymentStatus paymentStatus) {
-        this.orderDate = orderDate;
-        this.deliveryDate = deliveryDate;
-        this.destination = destination;
-        this.total = total;
-        this.status = status;
-        this.paymentMethod = paymentMethod;
-        this.paymentStatus = paymentStatus;
-    }
+    @ManyToMany
+    @JoinTable(name = "order_book", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private List<Book> books;
 
-    public Order(
-            Long id,
-            LocalDate orderDate,
-            LocalDate deliveryDate,
-            String destination,
-            Double total,
-            Status status,
-            PaymentMethod paymentMethod,
-            PaymentStatus paymentStatus) {
-        this.id = id;
-        this.orderDate = orderDate;
-        this.deliveryDate = deliveryDate;
-        this.destination = destination;
-        this.total = total;
-        this.status = status;
-        this.paymentMethod = paymentMethod;
-        this.paymentStatus = paymentStatus;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(LocalDate orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public LocalDate getDeliveryDate() {
-        return deliveryDate;
-    }
-
-    public void setDeliveryDate(LocalDate deliveryDate) {
-        this.deliveryDate = deliveryDate;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public PaymentMethod getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
-    public PaymentStatus getPaymentStatus() {
-        return paymentStatus;
-    }
-
-    public void setPaymentStatus(PaymentStatus paymentStatus) {
-        this.paymentStatus = paymentStatus;
-    }
+    @ManyToOne
+    @JoinColumn(name = "discount_id")
+    private Discount discount;
 
     public enum Status {
         PENDING, DELIVERED, CANCELLED

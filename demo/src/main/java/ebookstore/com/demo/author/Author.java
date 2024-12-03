@@ -1,21 +1,34 @@
 package ebookstore.com.demo.author;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import ebookstore.com.demo.book.Book;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Author {
 
     @Id
@@ -33,58 +46,6 @@ public class Author {
     @NotNull
     private LocalDate birthDate;
 
-    public Author() {
-    }
-
-    public Author(
-            String name,
-            String bio,
-            LocalDate birthDate) {
-        this.name = name;
-        this.bio = bio;
-        this.birthDate = birthDate;
-    }
-
-    public Author(
-            Long id,
-            String name,
-            String bio,
-            LocalDate birthDate) {
-        this.id = id;
-        this.name = name;
-        this.bio = bio;
-        this.birthDate = birthDate;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
+    @ManyToMany(mappedBy = "authors")
+    private List<Book> books;
 }

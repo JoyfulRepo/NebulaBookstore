@@ -1,23 +1,45 @@
 package ebookstore.com.demo.book;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import ebookstore.com.demo.author.Author;
+import ebookstore.com.demo.genre.Genre;
+import ebookstore.com.demo.order.Order;
+import ebookstore.com.demo.publisher.Publisher;
+import ebookstore.com.demo.review.Review;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Book {
 
     @Id
@@ -50,108 +72,23 @@ public class Book {
     @Size(max = 500)
     private String briefDescription;
 
-    public Book() {
-    }
+    @ManyToMany(mappedBy = "books")
+    private List<Order> orders;
 
-    public Book(
-            String title,
-            Double price,
-            BookStatus status,
-            Integer quantity,
-            LocalDate publicationDate,
-            String coverImage,
-            String briefDescription) {
-        this.title = title;
-        this.price = price;
-        this.status = status;
-        this.quantity = quantity;
-        this.publicationDate = publicationDate;
-        this.coverImage = coverImage;
-        this.briefDescription = briefDescription;
-    }
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private List<Review> reviews;
 
-    public Book(
-            Long id,
-            String title,
-            Double price,
-            BookStatus status,
-            Integer quantity,
-            LocalDate publicationDate,
-            String coverImage,
-            String briefDescription) {
-        this.id = id;
-        this.title = title;
-        this.price = price;
-        this.status = status;
-        this.quantity = quantity;
-        this.publicationDate = publicationDate;
-        this.coverImage = coverImage;
-        this.briefDescription = briefDescription;
-    }
+    @ManyToMany
+    @JoinTable(name = "book_genre", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    private List<Genre> genres;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToMany
+    @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
+    private List<Author> authors;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public BookStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(BookStatus status) {
-        this.status = status;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public LocalDate getPublicationDate() {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(LocalDate publicationDate) {
-        this.publicationDate = publicationDate;
-    }
-
-    public String getCoverImage() {
-        return coverImage;
-    }
-
-    public void setCoverImage(String coverImage) {
-        this.coverImage = coverImage;
-    }
-
-    public String getBriefDescription() {
-        return briefDescription;
-    }
-
-    public void setBriefDescription(String briefDescription) {
-        this.briefDescription = briefDescription;
-    }
+    @OneToOne
+    @JoinColumn(name = "publisher_id")
+    private Publisher publisher;
 
     public enum BookStatus {
         AVAILABLE,
