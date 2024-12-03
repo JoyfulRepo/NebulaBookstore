@@ -6,14 +6,35 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ebookstore.com.demo.book.Book;
+import ebookstore.com.demo.book.BookRepository;
+import ebookstore.com.demo.customer.Customer;
+import ebookstore.com.demo.customer.CustomerRepository;
+
 @Service
 public class ReviewService {
 
     @Autowired
     private ReviewRepository reviewRepository;
 
+    @Autowired
+    private BookRepository bookRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
     // Add
     public Review save(Review review) {
+        return reviewRepository.save(review);
+    }
+
+    public Review addReview(Long bookId, Long customerId, Integer rating, String comment) {
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + customerId));
+
+        Review review = new Review(null, rating, comment, book, customer);
         return reviewRepository.save(review);
     }
 
