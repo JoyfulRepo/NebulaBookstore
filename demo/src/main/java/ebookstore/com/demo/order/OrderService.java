@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ebookstore.com.demo.discount.Discount;
+import ebookstore.com.demo.discount.DiscountRepository;
 import ebookstore.com.demo.order.Order.PaymentMethod;
 import ebookstore.com.demo.order.Order.PaymentStatus;
 import ebookstore.com.demo.order.Order.Status;
@@ -16,6 +18,9 @@ public class OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private DiscountRepository discountRepository;
 
     // Add
     public Order save(Order order) {
@@ -115,5 +120,16 @@ public class OrderService {
         } else {
             throw new RuntimeException("Order not found with id " + id);
         }
+    }
+
+    public Order applyDiscount(Long orderId, Long discountId) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found with id: " + orderId));
+        Discount discount = discountRepository.findById(discountId)
+                .orElseThrow(() -> new RuntimeException("Discount not found with id: " + discountId));
+
+        order.setDiscount(discount);
+        order.setTotal(order.getTotal() - discount.getAmount());
+        return orderRepository.save(order);
     }
 }

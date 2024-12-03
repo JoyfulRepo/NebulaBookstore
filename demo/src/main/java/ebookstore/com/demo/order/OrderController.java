@@ -137,4 +137,14 @@ public class OrderController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
+    @PutMapping("/{orderId}/applyDiscount/{discountId}")
+    public ResponseEntity<Order> applyDiscount(@PathVariable Long orderId, @PathVariable Long discountId) {
+        try {
+            Order updatedOrder = orderService.applyDiscount(orderId, discountId);
+            return ResponseEntity.ok(updatedOrder);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(null);
+        }
+    }
 }
