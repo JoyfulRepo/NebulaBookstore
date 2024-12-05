@@ -60,6 +60,14 @@ public class ReviewController {
         return ResponseEntity.ok(reviews);
     }
 
+    @GetMapping("/book/{bookId}")
+    public ResponseEntity<List<Review>> getReviewsByBookId(@PathVariable Long bookId) {
+        List<Review> reviews = reviewService.findByBookId(bookId);
+        if (reviews.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(reviews);
+    }
     // Update
     // No editing a review's rating or comment
 }

@@ -81,6 +81,10 @@ public class BookService {
         return bookRepository.findByAuthorName(authorName);
     }
 
+    public List<Book> findByGenreName(String genreName) {
+        return bookRepository.findByGenreName(genreName);
+    }
+
     // Delete
     public boolean deleteById(Long id) {
         Optional<Book> bookOptional = bookRepository.findById(id);
@@ -121,6 +125,24 @@ public class BookService {
             Book book = bookOptional.get();
             book.setStatus(status);
             return bookRepository.save(book);
+        } else {
+            throw new RuntimeException("Book not found with id: " + id);
+        }
+    }
+
+    // Full Update
+    public Book updateBook(Long id, Book book) {
+        Optional<Book> bookOptional = bookRepository.findById(id);
+        if (bookOptional.isPresent()) {
+            Book updatedBook = bookOptional.get();
+            updatedBook.setTitle(book.getTitle());
+            updatedBook.setQuantity(book.getQuantity());
+            updatedBook.setPrice(book.getPrice());
+            updatedBook.setStatus(book.getStatus());
+            updatedBook.setAuthors(book.getAuthors());
+            updatedBook.setGenres(book.getGenres());
+            updatedBook.setPublisher(book.getPublisher());
+            return bookRepository.save(updatedBook);
         } else {
             throw new RuntimeException("Book not found with id: " + id);
         }

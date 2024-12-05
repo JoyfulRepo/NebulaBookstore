@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import ebookstore.com.demo.book.Book;
+import ebookstore.com.demo.book.BookRepository;
+import ebookstore.com.demo.cart.Cart;
+import ebookstore.com.demo.cart.CartRepository;
 import ebookstore.com.demo.review.Review;
 import ebookstore.com.demo.review.ReviewService;
 
@@ -22,6 +26,12 @@ public class CustomerService {
     @Autowired
     private ReviewService reviewService;
 
+    @Autowired
+    private CartRepository cartRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
+
     // Add
     public Customer save(Customer customer) {
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
@@ -30,6 +40,21 @@ public class CustomerService {
 
     public Review addReview(Long bookId, Long customerId, Integer rating, String comment) {
         return reviewService.addReview(bookId, customerId, rating, comment);
+    }
+
+    public Cart addBookToCart(Long customerId, Long bookId) {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + customerId));
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
+        Cart cart = customer.getCart();
+        if (cart == null) {
+            cart = new Cart();
+            cart.setCustomer(customer);
+            customer.setCart(cart);
+        }
+        cart.getBooks().add(book);
+        return cartRepository.save(cart);
     }
 
     // Get
@@ -85,6 +110,20 @@ public class CustomerService {
             Customer customer = customerOptional.get();
             customer.setPassword(passwordEncoder.encode(password));
             return customerRepository.save(customer);
+        } else {
+            throw new RuntimeException("Customer not found with id: " + id);
+        }
+    }
+
+    public Customer updateCustomer(Long id, Customer customer) {
+        Optional<Customer> customerOptional = customerRepository.findById(id);
+        if (customerOptional.isPresent()) {
+            Customer updatedCustomer = customerOptional.get();
+            updatedCustomer.setName(customer.getName());
+            updatedCustomer.setEmail(customer.getEmail());
+            updatedCustomer.setPhoneNumber(customer.getPhoneNumber());
+            updatedCustomer.setPassword(passwordEncoder.encode(customer.getPassword()));
+            return customerRepository.save(updatedCustomer);
         } else {
             throw new RuntimeException("Customer not found with id: " + id);
         }

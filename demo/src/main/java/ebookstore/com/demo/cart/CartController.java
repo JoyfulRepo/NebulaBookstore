@@ -3,7 +3,6 @@ package ebookstore.com.demo.cart;
 import java.time.LocalDate;
 import java.util.List;
 
-import ebookstore.com.demo.order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import ebookstore.com.demo.order.Order;
 
 @RestController
 @RequestMapping("/carts")
@@ -66,6 +67,17 @@ public class CartController {
         try {
             LocalDate parsedDate = LocalDate.parse(lastUpdated);
             Cart updatedCart = cartService.updateLastUpdated(id, parsedDate);
+            return ResponseEntity.ok(updatedCart);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    // Add Book to Cart
+    @PutMapping("/{cartId}/books/{bookId}")
+    public ResponseEntity<Cart> addBookToCart(@PathVariable Long cartId, @PathVariable Long bookId) {
+        try {
+            Cart updatedCart = cartService.addBookToCart(cartId, bookId);
             return ResponseEntity.ok(updatedCart);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

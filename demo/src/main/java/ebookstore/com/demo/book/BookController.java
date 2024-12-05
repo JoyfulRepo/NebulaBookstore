@@ -71,6 +71,15 @@ public class BookController {
         return ResponseEntity.ok(books);
     }
 
+    @GetMapping("/genre/{genreName}")
+    public ResponseEntity<List<Book>> getBookByGenre(@PathVariable String genreName) {
+        List<Book> books = bookService.findByGenreName(genreName);
+        if (books.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(books);
+    }
+
     // Update
     @PutMapping("/{id}/quantity")
     public ResponseEntity<Book> updateBookQuantity(@PathVariable Long id, @RequestParam Integer quantity) {
@@ -129,6 +138,17 @@ public class BookController {
     public ResponseEntity<Book> setPublisherForBook(@PathVariable Long bookId, @PathVariable Long publisherId) {
         try {
             Book updatedBook = bookService.setPublisher(bookId, publisherId);
+            return ResponseEntity.ok(updatedBook);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    // Full Update
+    @PutMapping("/{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book) {
+        try {
+            Book updatedBook = bookService.updateBook(id, book);
             return ResponseEntity.ok(updatedBook);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

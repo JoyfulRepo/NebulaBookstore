@@ -51,6 +51,10 @@ public class ReviewService {
         return reviewRepository.findByRating(rating);
     }
 
+    public List<Review> findByBookId(Long bookId) {
+        return reviewRepository.findByBookId(bookId);
+    }
+
     // Delete
     public boolean deleteById(Long id) {
         Optional<Review> reviewOptional = reviewRepository.findById(id);

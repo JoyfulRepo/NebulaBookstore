@@ -3,6 +3,7 @@ package ebookstore.com.demo.customer;
 import java.time.LocalDate;
 import java.util.List;
 
+import ebookstore.com.demo.cart.Cart;
 import ebookstore.com.demo.order.Order;
 import ebookstore.com.demo.review.Review;
 import jakarta.persistence.CascadeType;
@@ -11,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -70,6 +72,9 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Review> reviews;
+
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Cart cart;
 
     public enum CustomerGender {
         MALE,

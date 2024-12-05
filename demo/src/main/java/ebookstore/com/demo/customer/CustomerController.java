@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import ebookstore.com.demo.cart.Cart;
 import ebookstore.com.demo.review.Review;
 
 @RestController
@@ -31,8 +32,9 @@ public class CustomerController {
 
     // Add
     @PostMapping
-    public Customer addCustomer(@RequestBody Customer customer) {
-        return customerService.save(customer);
+    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
+        Customer savedCustomer = customerService.save(customer);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedCustomer);
     }
 
     @PostMapping("/{customerId}/books/{bookId}/reviews")
@@ -98,6 +100,26 @@ public class CustomerController {
     public ResponseEntity<Customer> updateCustomerPassword(@PathVariable Long id, @RequestParam String password) {
         try {
             Customer updatedCustomer = customerService.updatePassword(id, password);
+            return ResponseEntity.ok(updatedCustomer);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    @PutMapping("/{customerId}/cart/books/{bookId}")
+    public ResponseEntity<Cart> addBookToCart(@PathVariable Long customerId, @PathVariable Long bookId) {
+        try {
+            Cart updatedCart = customerService.addBookToCart(customerId, bookId);
+            return ResponseEntity.ok(updatedCart);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
+        try {
+            Customer updatedCustomer = customerService.updateCustomer(id, customer);
             return ResponseEntity.ok(updatedCustomer);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

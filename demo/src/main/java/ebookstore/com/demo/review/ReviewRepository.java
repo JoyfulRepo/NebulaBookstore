@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     List<Review> findByRating(Integer rating);
+
+    List<Review> findByBookId(Long bookId);
 }

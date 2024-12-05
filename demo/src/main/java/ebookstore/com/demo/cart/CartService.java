@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ebookstore.com.demo.book.Book;
+import ebookstore.com.demo.book.BookRepository;
 import ebookstore.com.demo.order.Order;
 import ebookstore.com.demo.order.OrderRepository;
 
@@ -19,6 +20,9 @@ public class CartService {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
 
     // Add
     public Cart save(Cart cart) {
@@ -55,6 +59,15 @@ public class CartService {
         } else {
             throw new RuntimeException("Cart not found with id: " + id);
         }
+    }
+
+    public Cart addBookToCart(Long cartId, Long bookId) {
+        Cart cart = cartRepository.findById(cartId)
+                .orElseThrow(() -> new RuntimeException("Cart not found with id: " + cartId));
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
+        cart.getBooks().add(book);
+        return cartRepository.save(cart);
     }
 
     public Order finalizeCart(Long cartId, String destination, Order.PaymentMethod paymentMethod) {
