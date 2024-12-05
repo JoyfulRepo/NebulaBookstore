@@ -62,6 +62,15 @@ public class BookController {
         return ResponseEntity.ok(books);
     }
 
+    @GetMapping("/author/{authorName}")
+    public ResponseEntity<List<Book>> getBookByAuthor(@PathVariable String authorName) {
+        List<Book> books = bookService.findByAuthorName(authorName);
+        if (books.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.ok(books);
+    }
+
     // Update
     @PutMapping("/{id}/quantity")
     public ResponseEntity<Book> updateBookQuantity(@PathVariable Long id, @RequestParam Integer quantity) {

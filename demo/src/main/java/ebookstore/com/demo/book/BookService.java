@@ -77,6 +77,10 @@ public class BookService {
         return bookRepository.findByTitle(title);
     }
 
+    public List<Book> findByAuthorName(String authorName) {
+        return bookRepository.findByAuthorName(authorName);
+    }
+
     // Delete
     public boolean deleteById(Long id) {
         Optional<Book> bookOptional = bookRepository.findById(id);
