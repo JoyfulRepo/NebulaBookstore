@@ -18,7 +18,7 @@ function CustomerCreateAccPage () {
                 <div className="cus-create-acc-box">Username</div>
                 <div className="cus-create-acc-box">Password</div>
                 <div className="cus-create-acc-box">Confirm password</div>
-                <NavLink to='/' className="cus-create-acc-box" id="cus-create-acc-crpage-btn">JOIN OUR UNIVERSE!</NavLink>
+                <NavLink to='/Home' className="cus-create-acc-box" id="cus-create-acc-crpage-btn">JOIN OUR UNIVERSE!</NavLink>
                 <p className="cus-create-acc-already">Already in our universe?</p>
             </div>
         </div>

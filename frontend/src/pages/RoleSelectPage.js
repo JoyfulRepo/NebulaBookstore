@@ -22,7 +22,7 @@ function RoleSelectPage () {
                         <img src={customerIcon} alt="Customer Role"></img>
                         <p className="role-link">CUSTOMER</p> 
                     </NavLink>  
-                    <NavLink to="/Login/Employee" className="role-button">
+                    <NavLink to="/Login/EmployeeSelectRole" className="role-button">
                         <img src={employeeIcon} alt="Customer Role"></img>
                         <p className="role-link">EMPLOYEE</p> 
                     </NavLink>
