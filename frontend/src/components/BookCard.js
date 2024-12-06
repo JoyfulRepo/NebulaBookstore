@@ -9,7 +9,22 @@ function BookCard ({name, rating, price, imageUrl}) {
             <p className='book-name'>{name}</p>
             <p className='book-rating'>Rating: {rating}</p>
             <p className='book-price'>Price: <span className='price'>{price} vnđ</span></p>
-            <img src={addBookButton} className='add-button'></img>
+            <button
+                className="add-book-button"
+                /*onClick={onAddBook}*/
+                style={{
+                    border: "none",
+                    background: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                }}
+            >
+                <img
+                    src={addBookButton}
+                    alt="Add to Cart"
+                    style={{ width: "128px", height: "32px" }}
+                />
+            </button>
         </div>
     );
 }

@@ -24,3 +24,10 @@
     margin-left: 16px;
 }
 
+.search-input{
+    border: none;
+    width: 80%;
+    height: auto;
+    margin-left: 10px;
+}
+
