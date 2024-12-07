@@ -1,120 +1,120 @@
 .cart-page {
-    min-height: 100vh;
-    width: 100%;
-    background-image: url('../assets/nebula-logo-wotext.svg');
-    background-color: rgba(219, 237, 243, 0.2);
-    background-attachment: fixed;
-    display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-image: url("../assets/nebula-logo-wotext.svg");
+  background-color: rgba(219, 237, 243, 0.2);
+  background-attachment: fixed;
+  display: flex;
 }
 
-.sidebar{
-    width: 250px;
-    height: 100vh;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .c-main-content {
-    margin-top: 120px;
-    margin-left: 120px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    height: fit-content;
+  margin-top: 120px;
+  margin-left: 120px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  height: fit-content;
 }
 
 .c-cart-list {
-    width: 750px;
-    height: 650px;
-    overflow-y: auto;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    height: 700px;
+  width: 750px;
+  height: 650px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 700px;
 }
 
-.c-cart-list::-webkit-scrollbar{
-    display: none;
+.c-cart-list::-webkit-scrollbar {
+  display: none;
 }
 
-.c-cart-item-container{
-    flex: 0 0 auto;
-    height: fit-content;
-    overflow-y: auto;
+.c-cart-item-container {
+  flex: 0 0 auto;
+  height: fit-content;
+  overflow-y: auto;
 }
 
 .summary-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #DBEDF3;
-    height: fit-content;
-    width: 320px;
-    position: sticky;
-    margin-top: 20px;
-    border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #dbedf3;
+  height: fit-content;
+  width: 320px;
+  position: sticky;
+  margin-top: 20px;
+  border-radius: 12px;
 }
 
-.summary-txt{
-    width: 100%;
-    text-align: center;
-    margin: 0;
-    padding: 20px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 24px;
-    font-weight: bold;
-    color: #00818A;
+.summary-txt {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #00818a;
 }
 
 .num-items {
-    width: 100%;
-    margin: 0;
-    margin-bottom: 10px;
-    padding-left: 40px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    color: #404B69;
+  width: 100%;
+  margin: 0;
+  margin-bottom: 10px;
+  padding-left: 40px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #404b69;
 }
 
 .total {
-    width: 100%;
-    margin: 0;
-    margin-bottom: 10px;
-    padding-left: 40px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    color: #404B69;
-    margin-bottom: 20px;
+  width: 100%;
+  margin: 0;
+  margin-bottom: 10px;
+  padding-left: 40px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #404b69;
+  margin-bottom: 20px;
 }
 
 .c-underline {
-   height: 2px;
-   width: 80%;
-   background-color: #00818A;
-    margin: 0;
+  height: 2px;
+  width: 80%;
+  background-color: #00818a;
+  margin: 0;
 }
 
 .purchase-btn {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    background-color: #00818A;
-    width: 60%;
-    height: fit-content;
-    padding: 10px;
-    margin: 20px;
-    border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #00818a;
+  width: 60%;
+  height: fit-content;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 8px;
 }
 
-.purchase-txt{
-    margin: 0;
-    margin-left: 10px;
-    color: #DBEDF3;
+.purchase-txt {
+  margin: 0;
+  margin-left: 10px;
+  color: #dbedf3;
 }

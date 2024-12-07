@@ -12,30 +12,31 @@ function CartPage() {
 
   const cartList = [
     {
-      imgUrl: "/images/book_cover/sample-book-cover.svg",
-      name: "You're a good friend, Capybara",
-      rating: 5,
-      price: 250000,
-      remaining: 400,
-      cartAmount: 1,
-    },
-    {
-      imgUrl:
-        "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1598823299i/42844155.jpg",
       name: "Harry Potter and the Sorcerer’s Stone",
       rating: 5,
       price: 400000,
       remaining: 100,
       cartAmount: 1,
+      imageUrl:
+        "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1598823299i/42844155.jpg",
     },
     {
-      imgUrl:
-        "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1474169725i/15881.jpg",
       name: "Harry Potter and the Chamber of Secrets",
       rating: 5,
       price: 350000,
-      remaining: 70,
+      remaining: 100,
       cartAmount: 1,
+      imageUrl:
+        "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1474169725i/15881.jpg",
+    },
+    {
+      name: "Harry Potter and the Prisoner of Azkaban",
+      rating: 5,
+      price: 350000,
+      remaining: 100,
+      cartAmount: 1,
+      imageUrl:
+        "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1630547330i/5.jpg",
     },
   ];
 
@@ -69,7 +70,7 @@ function CartPage() {
           {cartList.map((cartItem, index) => (
             <div className="c-cart-item-container" key={index}>
               <CartCard
-                imgUrl={cartItem.imgUrl}
+                imgUrl={cartItem.imageUrl}
                 name={cartItem.name}
                 rating={cartItem.rating}
                 price={cartItem.price}

@@ -1,145 +1,150 @@
 .wish-card {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: #FFFFFF;
-    width: 1000px;
-    border-radius: 12px;
-    padding: 20px;
-    gap: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #ffffff;
+  width: 100%;
+  border-radius: 12px;
+  padding: 20px;
+  gap: 20px;
+  position: relative;
 }
 
 .w-book-img {
-    width: 128px;
-    border-radius: 12px;
+  width: 128px;
+  height: 192px;
+  border-radius: 12px;
+  margin-right: 20px;
+  object-fit: cover;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .w-book-info {
-    display: flex;
-    flex-direction: column;
-    align-items: self-start;
-    margin-right: 400px;
-    width: 160px;
-    height: 128px;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  margin-right: auto;
+  width: 400px;
 }
 
 .w-book-name {
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    margin: 0;
-    margin-bottom: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  margin: 0;
+  margin-bottom: 10px;
 }
 
 .w-book-price {
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    margin: 0;
-    margin-bottom: 5px;
-    color: rgba(64, 75, 105, 0.5);
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  margin: 0;
+  margin-bottom: 5px;
+  color: rgba(64, 75, 105, 0.5);
 }
 
 .w-book-rating {
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    margin: 0;
-    margin-bottom: 15px;
-    color: #00818A;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 15px;
+  color: #00818a;
 }
 
 .w-book-remaining {
-    font-family: 'Poppins', sans-serif;
-    font-size: 8px;
-    font-style: italic;
-    margin: 0;
-    color: #404B69;
+  font-family: "Poppins", sans-serif;
+  font-size: 8px;
+  font-style: italic;
+  margin: 0;
+  color: #404b69;
 }
 
 .w-purchase-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .w-amount-modify {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
 }
 
 .minus-btn {
-    background-color: #D9D9D9;
-    padding: 8px;
-    border-radius: 8px 0px 0px, 8px;
+  background-color: #d9d9d9;
+  padding: 8px;
+  border-radius: 8px 0px 0px, 8px;
 }
 
 .add-btn {
-    background-color: #D9D9D9;
-    padding: 8px;
-    border-radius: 8px 0px 0px, 8px;
+  background-color: #d9d9d9;
+  padding: 8px;
+  border-radius: 8px 0px 0px, 8px;
 }
 
 .w-amount-num {
-    margin: 0;
-    width: 50px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #F0F0F0;
+  margin: 0;
+  width: 50px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
 }
 
 .w-make-decision {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 .w-add-to-cart-btn {
-    display: flex;
-    flex: row;
-    align-items: center;
-    background-color: #283149;
-    height: 40px;
-    border-radius: 8px;
+  display: flex;
+  flex: row;
+  align-items: center;
+  background-color: #283149;
+  height: 40px;
+  border-radius: 8px;
 }
 
 .w-add-to-cart-icon {
-    padding: 5px;
-    padding-left: 10px;
+  padding: 5px;
+  padding-left: 10px;
 }
 
 .add-to-cart-txt {
-    font-family: 'Poppins',sans-serif;
-    font-size: 12px;
-    color: #DBEDF3;
-    margin: 0;
-    padding: 5px;
-    padding-right: 10px;
-    padding-left: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  color: #dbedf3;
+  margin: 0;
+  padding: 5px;
+  padding-right: 10px;
+  padding-left: 0;
 }
 
 .w-buy-now-btn {
-    display: flex;
-    flex: row;
-    align-items: center;
-    background-color: #00818A;
-    height: 40px;
-    border-radius: 8px;
+  display: flex;
+  flex: row;
+  align-items: center;
+  background-color: #00818a;
+  height: 40px;
+  border-radius: 8px;
 }
 
 .w-buy-now-icon {
-    padding: 5px;
-    padding-left: 10px;
+  padding: 5px;
+  padding-left: 10px;
 }
 
 .buy-now-txt {
-    font-family: 'Poppins',sans-serif;
-    font-size: 12px;
-    color: #DBEDF3;
-    margin: 0;
-    padding: 5px;
-    padding-right: 10px;
-    padding-left: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  color: #dbedf3;
+  margin: 0;
+  padding: 5px;
+  padding-right: 10px;
+  padding-left: 0;
 }
