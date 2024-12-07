@@ -5,17 +5,18 @@ import "../styles/PaymentPage.css";
 
 function PaymentPage() {
     const location = useLocation();
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const selectedItems = location.state?.selectedItems || [];
 
-    const [paymentMethod, setPaymentMethod] = useState(""); 
+    const [paymentMethod, setPaymentMethod] = useState(""); // State to track selected payment method
+    const [address, setAddress] = useState(""); // State to track delivery address
     const [cardDetails, setCardDetails] = useState({
         cardNumber: "",
         ccv: "",
         expiryDate: "",
     });
-    const [isProcessing, setIsProcessing] = useState(false); 
 
+    // Group items by book name and calculate total price
     const groupedItems = selectedItems.reduce((acc, item) => {
         const existingItem = acc.find((i) => i.name === item.name);
         if (existingItem) {
@@ -39,6 +40,11 @@ function PaymentPage() {
     };
 
     const handleFinishPayment = () => {
+        if (!address.trim()) {
+            alert("Please enter your delivery address!");
+            return;
+        }
+
         if (!paymentMethod) {
             alert("Please select a payment method!");
             return;
@@ -52,12 +58,8 @@ function PaymentPage() {
             return;
         }
 
-        setIsProcessing(true);
-
-        setTimeout(() => {
-            alert("Payment successfully processed!");
-            navigate("/Home"); 
-        }, 2000);
+        alert("Payment successfully processed!");
+        navigate("/"); // Navigate back to the homepage
     };
 
     return (
@@ -102,6 +104,30 @@ function PaymentPage() {
             </div>
 
             <div style={{ marginTop: "30px", width: "80%" }}>
+                <label
+                    htmlFor="delivery-address"
+                    style={{ display: "block", marginBottom: "10px", fontWeight: "bold" }}
+                >
+                    Delivery Address:
+                </label>
+                <textarea
+                    id="delivery-address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder="Enter your full delivery address here..."
+                    rows={4}
+                    style={{
+                        width: "100%",
+                        padding: "10px",
+                        fontSize: "16px",
+                        borderRadius: "5px",
+                        border: "1px solid #ccc",
+                        resize: "none",
+                    }}
+                ></textarea>
+            </div>
+
+            <div style={{ marginTop: "20px", width: "80%" }}>
                 <label style={{ display: "block", marginBottom: "10px", fontWeight: "bold" }}>
                     Please select payment method:
                 </label>
@@ -180,19 +206,18 @@ function PaymentPage() {
 
             <button
                 onClick={handleFinishPayment}
-                disabled={isProcessing}
                 style={{
                     marginTop: "30px",
                     padding: "15px 30px",
                     fontSize: "18px",
-                    backgroundColor: isProcessing ? "#ccc" : "#00818A",
+                    backgroundColor: "#00818A",
                     color: "white",
                     border: "none",
                     borderRadius: "5px",
-                    cursor: isProcessing ? "not-allowed" : "pointer",
+                    cursor: "pointer",
                 }}
             >
-                {isProcessing ? "Processing..." : "Finish Payment"}
+                Finish Payment
             </button>
         </div>
     );

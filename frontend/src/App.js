@@ -17,6 +17,7 @@ import ManagerLoginPage from './pages/ManagerLoginPage';
 import StaffLoginPage from './pages/StaffLoginPage';
 import ShipperLoginPage from './pages/ShipperLoginPage';
 
+import ITStaffHomepage from './pages/ITStaffHomePage';
 import ManagerHomepage from './pages/ManagerHomepage';
 import StaffHomepage from './pages/StaffHomepage';
 import ShipperHomepage from './pages/ShipperHomepage';
@@ -51,6 +52,7 @@ function App() {
                 <Route path="/PurchaseHistory/Preparing" element={<PHistoryPrepare />} />
                 <Route path='/Settings' element={<SettingsPage />} />
                 <Route path='/Payment' element={<PaymentPage />} />
+                <Route path='/ITStaff/Home' element={<ITStaffHomepage />} />
                 <Route path='/Manager/Home' element={<ManagerHomepage />} />
                 <Route path='/Staff/Home' element={<StaffHomepage />} />
                 <Route path='/Shipper/Home' element={<ShipperHomepage />} />
