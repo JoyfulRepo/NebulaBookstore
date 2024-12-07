@@ -15,30 +15,33 @@ function CartPage() {
   const cartList = [
     {
       id: 1,
-      imgUrl: "/images/book_cover/sample-book-cover.svg",
-      name: "You're a good friend, Capybara",
+      imgUrl:
+        "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1598823299i/42844155.jpg",
+      name: "Harry Potter and the Sorcerer’s Stone",
       rating: 5,
-      price: 99999,
-      remaining: 999,
-      cartAmount: 999,
+      price: 400000,
+      remaining: 70,
+      cartAmount: 1,
     },
     {
       id: 2,
-      imgUrl: "/images/book_cover/sample-book-cover.svg",
-      name: "You're a good friend, Capybara",
+      imgUrl:
+        "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1474169725i/15881.jpg",
+      name: "Harry Potter and the Chamber of Secrets",
       rating: 5,
-      price: 99999,
-      remaining: 999,
-      cartAmount: 999,
+      price: 350000,
+      remaining: 60,
+      cartAmount: 1,
     },
     {
       id: 3,
-      imgUrl: "/images/book_cover/sample-book-cover.svg",
-      name: "Another Capybara",
+      imgUrl:
+        "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1712758755i/203579073.jpg",
+      name: "Deadly Animals",
       rating: 5,
-      price: 99999,
-      remaining: 999,
-      cartAmount: 999,
+      price: 450000,
+      remaining: 100,
+      cartAmount: 1,
     },
   ];
 
