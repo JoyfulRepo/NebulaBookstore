@@ -26,7 +26,7 @@ import PHistoryShipping from './pages/PHistoryShipping';
 import PHistoryDelivered from './pages/PHistoryDelivered';
 import PHistoryPrepare from './pages/PHistoryPrepare';
 import SettingsPage from './pages/SettingsPage';
-
+import PaymentPage from './pages/PaymentPage';
 
 function App() {
     return (
@@ -50,7 +50,7 @@ function App() {
                 <Route path="/PurchaseHistory/Delivered" element={<PHistoryDelivered />} />
                 <Route path="/PurchaseHistory/Preparing" element={<PHistoryPrepare />} />
                 <Route path='/Settings' element={<SettingsPage />} />
-
+                <Route path='/Payment' element={<PaymentPage />} />
                 <Route path='/Manager/Home' element={<ManagerHomepage />} />
                 <Route path='/Staff/Home' element={<StaffHomepage />} />
                 <Route path='/Shipper/Home' element={<ShipperHomepage />} />

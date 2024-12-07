@@ -11,7 +11,7 @@ function PreparingCard({prepareCardInfo}) {
             <img src={prepareCardInfo.imgUrl} className="prp-book-cover"></img>
             <div className="prepare-card-info">
                 <p className="prepare-book-name">{prepareCardInfo.title}</p>
-                <div className="prepare-book-info">
+                <div className="preapre-book-info">
                     <div className="prepare-order-info">
                         <p className="prp-prop">Price: <span className="prp-or-value">{prepareCardInfo.price}</span></p>
                         <p className="prp-prop">Quantity: <span className="prp-or-value">{prepareCardInfo.quantity}</span></p>
