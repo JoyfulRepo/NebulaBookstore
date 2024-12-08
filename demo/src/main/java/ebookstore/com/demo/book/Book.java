@@ -9,7 +9,10 @@ import ebookstore.com.demo.order.Order;
 import ebookstore.com.demo.publisher.Publisher;
 import ebookstore.com.demo.review.Review;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,6 +21,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -40,37 +44,48 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Table(name = "book")
 public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "BookID")
     private Long id;
 
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 200)
+    @Column(name = "Title", nullable = false)
     private String title;
 
     @NotNull
     @DecimalMin(value = "0.01", inclusive = true)
+    @Column(name = "Price", nullable = false)
     private Double price;
 
-    @NotNull
-    private BookStatus status;
+    @Size(max = 500)
+    @Column(name = "CoverImage", nullable = true)
+    private String coverImage;
 
     @NotNull
     @Min(0)
+    @Column(name = "Quantity", nullable = false)
     private Integer quantity;
 
-    @NotNull
+    @Column(name = "PublicationDate", nullable = true)
     private LocalDate publicationDate;
 
-    @NotBlank
-    @Size(max = 255)
-    private String coverImage; // cover image URL
-
-    @NotBlank
-    @Size(max = 500)
+    @Size(max = 1000)
+    @Column(name = "BriefDescription", nullable = true)
     private String briefDescription;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Status", nullable = false)
+    private BookStatus status;
+
+    @OneToOne
+    @JoinColumn(name = "PublisherID", nullable = true)
+    private Publisher publisher;
 
     @ManyToMany(mappedBy = "books")
     private List<Order> orders;
@@ -86,14 +101,9 @@ public class Book {
     @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
     private List<Author> authors;
 
-    @OneToOne
-    @JoinColumn(name = "publisher_id")
-    private Publisher publisher;
-
     public enum BookStatus {
-        AVAILABLE,
-        OUT_OF_STOCK,
-        DISCONTINUED,
-        UPCOMING
+        Upcoming,
+        In_Stock,
+        Out_Of_Stock
     }
 }
