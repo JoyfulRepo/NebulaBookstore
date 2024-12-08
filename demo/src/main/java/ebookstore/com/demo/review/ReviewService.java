@@ -34,7 +34,8 @@ public class ReviewService {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + customerId));
 
-        Review review = new Review(null, rating, comment, book, customer);
+        ReviewId reviewId = new ReviewId(null, customerId, bookId);
+        Review review = new Review(reviewId, rating, comment, customer, book);
         return reviewRepository.save(review);
     }
 
@@ -43,7 +44,7 @@ public class ReviewService {
         return (List<Review>) reviewRepository.findAll();
     }
 
-    public Optional<Review> findById(Long id) {
+    public Optional<Review> findById(ReviewId id) {
         return reviewRepository.findById(id);
     }
 
@@ -56,7 +57,7 @@ public class ReviewService {
     }
 
     // Delete
-    public boolean deleteById(Long id) {
+    public boolean deleteById(ReviewId id) {
         Optional<Review> reviewOptional = reviewRepository.findById(id);
         if (reviewOptional.isPresent()) {
             reviewRepository.deleteById(id);

@@ -1,17 +1,16 @@
-package ebookstore.com.demo.review;
+package ebookstore.com.demo.activityLog;
 
-import ebookstore.com.demo.book.Book;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import ebookstore.com.demo.customer.Customer;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,27 +28,28 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class Review {
+public class ActivityLog {
 
     @EmbeddedId
-    private ReviewId id;
-
-    @NotNull
-    @Min(1)
-    @Max(5)
-    @Column(name = "Rating", nullable = false)
-    private Integer rating;
+    private ActivityLogId id;
 
     @NotBlank
-    @Size(max = 1000)
-    @Column(name = "Review", nullable = false, length = 1000)
-    private String review;
+    @Column(name = "ActionType", nullable = false, length = 50)
+    private String actionType;
+
+    @NotBlank
+    @Column(name = "ActionDescription", nullable = false, length = 255)
+    private String actionDescription;
+
+    @NotNull
+    @Column(name = "Date", nullable = false)
+    private LocalDate date;
+
+    @NotNull
+    @Column(name = "Time", nullable = false)
+    private LocalTime time;
 
     @ManyToOne
     @JoinColumn(name = "CustomerID", insertable = false, updatable = false)
     private Customer customer;
-
-    @ManyToOne
-    @JoinColumn(name = "BookID", insertable = false, updatable = false)
-    private Book book;
 }

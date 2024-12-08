@@ -1,9 +1,8 @@
 package ebookstore.com.demo.order;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
-import ebookstore.com.demo.book.Book;
 import ebookstore.com.demo.cart.Cart;
 import ebookstore.com.demo.customer.Customer;
 import ebookstore.com.demo.employee.Employee;
@@ -15,8 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumns;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
@@ -39,7 +37,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Table(name = "`ORDER`") // Escape the table name to avoid conflicts with reserved keywords
+@Table(name = "`ORDER`")
 public class Order {
 
     @Id
@@ -48,47 +46,46 @@ public class Order {
     private Long id;
 
     @NotNull
-    @Column(name = "OrderDate")
+    @Column(name = "OrderDate", nullable = false)
     private LocalDate orderDate;
 
     @NotNull
-    @Column(name = "ExpectedArrival")
+    @Column(name = "ExpectedArrival", nullable = false)
     private LocalDate expectedArrival;
 
     @NotBlank
-    @Column(name = "Destination")
+    @Column(name = "Destination", nullable = false, length = 255)
     private String destination;
 
     @NotNull
     @DecimalMin(value = "0.00", inclusive = true)
-    @Column(name = "TotalAmount")
-    private Double totalAmount;
+    @Column(name = "TotalAmount", nullable = false, precision = 10, scale = 2)
+    private BigDecimal totalAmount;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "Status")
+    @Column(name = "Status", nullable = false)
     private Status status;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "PaymentMethod")
+    @Column(name = "PaymentMethod", nullable = false)
     private PaymentMethod paymentMethod;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "PaymentStatus")
+    @Column(name = "PaymentStatus", nullable = false)
     private PaymentStatus paymentStatus;
 
     @ManyToOne
-    @JoinColumn(name = "CustomerID")
+    @JoinColumn(name = "CustomerID", insertable = false, updatable = false)
     private Customer customer;
 
-    @ManyToMany
-    @JoinTable(name = "order_book", joinColumns = @JoinColumn(name = "OrderID"), inverseJoinColumns = @JoinColumn(name = "BookID"))
-    private List<Book> books;
-
     @ManyToOne
-    @JoinColumn(name = "CartID")
+    @JoinColumns({
+            @JoinColumn(name = "CartID", referencedColumnName = "CartID"),
+            @JoinColumn(name = "CustomerID", referencedColumnName = "CustomerID")
+    })
     private Cart cart;
 
     @ManyToOne

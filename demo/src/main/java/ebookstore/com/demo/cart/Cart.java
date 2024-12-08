@@ -5,17 +5,15 @@ import java.util.List;
 
 import ebookstore.com.demo.book.Book;
 import ebookstore.com.demo.customer.Customer;
-import ebookstore.com.demo.order.Order;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotNull;
-
+import jakarta.persistence.MapsId;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -32,23 +30,24 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
+@Table(name = "CART")
 public class Cart {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private CartId id;
 
-    @NotNull
+    @Column(name = "LastModified", nullable = true)
     private LocalDate lastUpdated;
 
     @ManyToMany
-    @JoinTable(name = "cart_book", joinColumns = @JoinColumn(name = "cart_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
+    @JoinTable(name = "CART_CONTAIN_BOOK", joinColumns = {
+            @JoinColumn(name = "CartID", referencedColumnName = "CartID"),
+            @JoinColumn(name = "CustomerID", referencedColumnName = "CustomerID") // Correct reference
+    }, inverseJoinColumns = @JoinColumn(name = "BookID"))
     private List<Book> books;
 
-    @NotNull
-    private Integer bookCount;
-
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @MapsId("customerId") // Specifies which part of the composite key this maps to
+    @JoinColumn(name = "CustomerID", nullable = false) // Remove `insertable=false, updatable=false`
     private Customer customer;
 }

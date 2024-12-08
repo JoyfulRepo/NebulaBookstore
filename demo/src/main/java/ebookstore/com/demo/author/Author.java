@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import ebookstore.com.demo.book.Book;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,17 +34,21 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @NotBlank
     @Size(max = 50)
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
 
     @NotBlank
     @Size(max = 500)
+    @Column(name = "bio", nullable = false, length = 500)
     private String bio;
 
     @NotNull
+    @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
     @ManyToMany(mappedBy = "authors")

@@ -1,5 +1,6 @@
 package ebookstore.com.demo.discount;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -65,7 +66,7 @@ public class DiscountController {
     }
 
     @PutMapping("/{id}/amount")
-    public ResponseEntity<Discount> updateDiscountAmount(@PathVariable Long id, @RequestParam Double amount) {
+    public ResponseEntity<Discount> updateDiscountAmount(@PathVariable Long id, @RequestParam BigDecimal amount) {
         try {
             Discount updatedDiscount = discountService.updateAmount(id, amount);
             return ResponseEntity.ok(updatedDiscount);

@@ -23,15 +23,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/customers/**").authenticated()
-                        .anyRequest().permitAll())
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/login")
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .permitAll());
+            .csrf().disable() // Disable CSRF for testing purposes
+            .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                .requestMatchers("/books/**").permitAll() // Allow access to /books endpoint
+                .requestMatchers("/customers/**").authenticated()
+                .anyRequest().permitAll())
+            .formLogin(formLogin -> formLogin
+                .loginPage("/login")
+                .permitAll())
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .permitAll());
         return http.build();
     }
 
@@ -39,9 +41,9 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
         PasswordEncoder encoder = passwordEncoder();
         return new InMemoryUserDetailsManager(
-                User.withUsername("user")
-                        .password(encoder.encode("password"))
-                        .roles("USER")
-                        .build());
+            User.withUsername("user")
+                .password(encoder.encode("password"))
+                .roles("USER")
+                .build());
     }
 }

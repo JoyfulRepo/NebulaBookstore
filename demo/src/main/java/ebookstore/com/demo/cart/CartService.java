@@ -1,5 +1,7 @@
 package ebookstore.com.demo.cart;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -31,15 +33,15 @@ public class CartService {
 
     // Get
     public List<Cart> findAll() {
-        return (List<Cart>) cartRepository.findAll();
+        return cartRepository.findAll();
     }
 
-    public Optional<Cart> findById(Long id) {
+    public Optional<Cart> findById(CartId id) {
         return cartRepository.findById(id);
     }
 
     // Delete
-    public boolean deleteById(Long id) {
+    public boolean deleteById(CartId id) {
         Optional<Cart> cartOptional = cartRepository.findById(id);
         if (cartOptional.isPresent()) {
             cartRepository.deleteById(id);
@@ -50,7 +52,7 @@ public class CartService {
     }
 
     // Update
-    public Cart updateLastUpdated(Long id, LocalDate lastUpdated) {
+    public Cart updateLastUpdated(CartId id, LocalDate lastUpdated) {
         Optional<Cart> cartOptional = cartRepository.findById(id);
         if (cartOptional.isPresent()) {
             Cart cart = cartOptional.get();
@@ -61,7 +63,7 @@ public class CartService {
         }
     }
 
-    public Cart addBookToCart(Long cartId, Long bookId) {
+    public Cart addBookToCart(CartId cartId, Long bookId) {
         Cart cart = cartRepository.findById(cartId)
                 .orElseThrow(() -> new RuntimeException("Cart not found with id: " + cartId));
         Book book = bookRepository.findById(bookId)
@@ -70,7 +72,7 @@ public class CartService {
         return cartRepository.save(cart);
     }
 
-    public Order finalizeCart(Long cartId, String destination, Order.PaymentMethod paymentMethod) {
+    public Order finalizeCart(CartId cartId, String destination, Order.PaymentMethod paymentMethod) {
         Optional<Cart> cartOptional = cartRepository.findById(cartId);
         if (cartOptional.isPresent()) {
             Cart cart = cartOptional.get();
@@ -85,16 +87,20 @@ public class CartService {
         Order order = new Order();
         order.setOrderDate(LocalDate.now());
         order.setDestination(destination); // Set the actual destination
-        order.setTotal(calculateTotal(cart));
-        order.setStatus(Order.Status.PENDING);
+        order.setTotalAmount(calculateTotal(cart));
+        order.setStatus(Order.Status.Pending);
         order.setPaymentMethod(paymentMethod); // Set the actual payment method
-        order.setPaymentStatus(Order.PaymentStatus.UNPAID);
+        order.setPaymentStatus(Order.PaymentStatus.Unpaid);
         order.setCustomer(cart.getCustomer());
-        order.setBooks(cart.getBooks());
+        order.setCart(cart);
         return order;
     }
 
-    private Double calculateTotal(Cart cart) {
-        return cart.getBooks().stream().mapToDouble(Book::getPrice).sum();
+    private BigDecimal calculateTotal(Cart cart) {
+        return cart.getBooks().stream()
+                .map(Book::getPrice)
+                .map(BigDecimal::valueOf)
+                .reduce(BigDecimal.ZERO, BigDecimal::add)
+                .setScale(2, RoundingMode.HALF_UP);
     }
 }

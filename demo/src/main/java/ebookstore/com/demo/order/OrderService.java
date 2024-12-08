@@ -1,5 +1,6 @@
 package ebookstore.com.demo.order;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -82,7 +83,7 @@ public class OrderService {
         Optional<Order> orderOptional = orderRepository.findById(id);
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
-            order.setDeliveryDate(deliveryDate);
+            order.setExpectedArrival(deliveryDate);
             return orderRepository.save(order);
         } else {
             throw new RuntimeException("Order not found with id " + id);
@@ -100,11 +101,11 @@ public class OrderService {
         }
     }
 
-    public Order updateTotal(Long id, Double total) {
+    public Order updateTotal(Long id, BigDecimal total) {
         Optional<Order> orderOptional = orderRepository.findById(id);
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
-            order.setTotal(total);
+            order.setTotalAmount(total);
             return orderRepository.save(order);
         } else {
             throw new RuntimeException("Order not found with id " + id);
@@ -120,16 +121,5 @@ public class OrderService {
         } else {
             throw new RuntimeException("Order not found with id " + id);
         }
-    }
-
-    public Order applyDiscount(Long orderId, Long discountId) {
-        Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Order not found with id: " + orderId));
-        Discount discount = discountRepository.findById(discountId)
-                .orElseThrow(() -> new RuntimeException("Discount not found with id: " + discountId));
-
-        order.setDiscount(discount);
-        order.setTotal(order.getTotal() - discount.getAmount());
-        return orderRepository.save(order);
     }
 }

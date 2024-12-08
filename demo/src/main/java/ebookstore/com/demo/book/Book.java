@@ -5,7 +5,6 @@ import java.util.List;
 
 import ebookstore.com.demo.author.Author;
 import ebookstore.com.demo.genre.Genre;
-import ebookstore.com.demo.order.Order;
 import ebookstore.com.demo.publisher.Publisher;
 import ebookstore.com.demo.review.Review;
 import jakarta.persistence.CascadeType;
@@ -19,6 +18,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -44,7 +44,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Table(name = "book")
+@Table(name = "BOOK")
 public class Book {
 
     @Id
@@ -83,22 +83,19 @@ public class Book {
     @Column(name = "Status", nullable = false)
     private BookStatus status;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "PublisherID", nullable = true)
     private Publisher publisher;
-
-    @ManyToMany(mappedBy = "books")
-    private List<Order> orders;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<Review> reviews;
 
     @ManyToMany
-    @JoinTable(name = "book_genre", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    @JoinTable(name = "BOOK_HAS_GENRE", joinColumns = @JoinColumn(name = "BookID"), inverseJoinColumns = @JoinColumn(name = "GenreID"))
     private List<Genre> genres;
 
     @ManyToMany
-    @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
+    @JoinTable(name = "BOOK_HAS_AUTHOR", joinColumns = @JoinColumn(name = "BookID"), inverseJoinColumns = @JoinColumn(name = "AuthorID"))
     private List<Author> authors;
 
     public enum BookStatus {

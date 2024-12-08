@@ -1,5 +1,6 @@
 package ebookstore.com.demo.discount;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +51,7 @@ public class DiscountService {
         }
     }
 
-    public Discount updateAmount(Long id, Double amount) {
+    public Discount updateAmount(Long id, BigDecimal amount) {
         Optional<Discount> discountOptional = discountRepository.findById(id);
         if (discountOptional.isPresent()) {
             Discount discount = discountOptional.get();

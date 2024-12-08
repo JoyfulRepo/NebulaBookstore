@@ -35,7 +35,7 @@ public class ReviewController {
 
     // Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReviewById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteReviewById(@PathVariable ReviewId id) {
         boolean isDeleted = reviewService.deleteById(id);
         if (isDeleted)
             return ResponseEntity.noContent().build();
@@ -45,7 +45,7 @@ public class ReviewController {
 
     // Get
     @GetMapping("/{id}")
-    public ResponseEntity<Review> getReviewById(@PathVariable Long id) {
+    public ResponseEntity<Review> getReviewById(@PathVariable ReviewId id) {
         return reviewService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));

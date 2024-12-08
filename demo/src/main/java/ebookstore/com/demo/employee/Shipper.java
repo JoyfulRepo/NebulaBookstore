@@ -1,57 +1,30 @@
 package ebookstore.com.demo.employee;
 
-import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Shipper extends Employee {
 
     @NotBlank
-    private String vehicle;
+    @Column(name = "VehicleNumber", nullable = false, length = 20)
+    private String vehicleNumber;
 
     @NotBlank
-    private String vehicleLicensePlate;
-
-    public Shipper() {
-        super();
-    }
-
-    public Shipper(
-            String name,
-            Gender gender,
-            LocalDate birthDate,
-            String identityCardNumber,
-            String phoneNumber,
-            String address,
-            LocalDate startDate,
-            Double salary,
-            String vehicle,
-            String vehicleLicensePlate) {
-        super(name, gender, birthDate, identityCardNumber, phoneNumber, address, startDate, salary);
-        this.vehicle = vehicle;
-        this.vehicleLicensePlate = vehicleLicensePlate;
-    }
-
-    public Shipper(
-            Long id,
-            String name,
-            Gender gender,
-            LocalDate birthDate,
-            String identityCardNumber,
-            String phoneNumber,
-            String address,
-            LocalDate startDate,
-            Double salary,
-            String vehicle,
-            String vehicleLicensePlate) {
-        super(id, name, gender, birthDate, identityCardNumber, phoneNumber, address, startDate, salary);
-        this.vehicle = vehicle;
-        this.vehicleLicensePlate = vehicleLicensePlate;
-    }
+    @Column(name = "VehicleType", nullable = false, length = 30)
+    private String vehicleType;
 }
