@@ -22,7 +22,7 @@ public class GenreService {
         return (List<Genre>) genreRepository.findAll();
     }
 
-    public Optional<Genre> findById(Long id) {
+    public Optional<Genre> findById(Integer id) {
         return genreRepository.findById(id);
     }
 
@@ -31,7 +31,7 @@ public class GenreService {
     }
 
     // Delete
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Integer id) {
         Optional<Genre> genreOptional = genreRepository.findById(id);
         if (genreOptional.isPresent()) {
             genreRepository.deleteById(id);
@@ -42,7 +42,7 @@ public class GenreService {
     }
 
     // Update
-    public Genre updateName(Long id, String name) {
+    public Genre updateName(Integer id, String name) {
         Optional<Genre> genreOptional = genreRepository.findById(id);
         if (genreOptional.isPresent()) {
             Genre genre = genreOptional.get();

@@ -20,9 +20,6 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    @Autowired
-    private DiscountRepository discountRepository;
-
     // Add
     public Order save(Order order) {
         return orderRepository.save(order);
@@ -33,7 +30,7 @@ public class OrderService {
         return (List<Order>) orderRepository.findAll();
     }
 
-    public Optional<Order> findById(Long id) {
+    public Optional<Order> findById(Integer id) {
         return orderRepository.findById(id);
     }
 
@@ -46,7 +43,7 @@ public class OrderService {
     }
 
     // Delete
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Integer id) {
         Optional<Order> orderOptional = orderRepository.findById(id);
         if (orderOptional.isPresent()) {
             orderRepository.deleteById(id);
@@ -57,7 +54,7 @@ public class OrderService {
     }
 
     // Update
-    public Order updateStatus(Long id, Status status) {
+    public Order updateStatus(Integer id, Status status) {
         Optional<Order> orderOptional = orderRepository.findById(id);
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
@@ -68,7 +65,7 @@ public class OrderService {
         }
     }
 
-    public Order updatePaymentStatus(Long id, PaymentStatus paymentStatus) {
+    public Order updatePaymentStatus(Integer id, PaymentStatus paymentStatus) {
         Optional<Order> orderOptional = orderRepository.findById(id);
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
@@ -79,7 +76,7 @@ public class OrderService {
         }
     }
 
-    public Order updateDeliveryDate(Long id, LocalDate deliveryDate) {
+    public Order updateDeliveryDate(Integer id, LocalDate deliveryDate) {
         Optional<Order> orderOptional = orderRepository.findById(id);
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
@@ -90,7 +87,7 @@ public class OrderService {
         }
     }
 
-    public Order updateDestination(Long id, String destination) {
+    public Order updateDestination(Integer id, String destination) {
         Optional<Order> orderOptional = orderRepository.findById(id);
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
@@ -101,7 +98,7 @@ public class OrderService {
         }
     }
 
-    public Order updateTotal(Long id, BigDecimal total) {
+    public Order updateTotal(Integer id, BigDecimal total) {
         Optional<Order> orderOptional = orderRepository.findById(id);
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
@@ -112,7 +109,7 @@ public class OrderService {
         }
     }
 
-    public Order updatePaymentMethod(Long id, PaymentMethod paymentMethod) {
+    public Order updatePaymentMethod(Integer id, PaymentMethod paymentMethod) {
         Optional<Order> orderOptional = orderRepository.findById(id);
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();

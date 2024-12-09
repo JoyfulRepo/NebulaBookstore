@@ -34,7 +34,7 @@ public class Storage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "StorageID")
-    private Long id;
+    private Integer id;
 
     @NotBlank
     @Size(max = 100)

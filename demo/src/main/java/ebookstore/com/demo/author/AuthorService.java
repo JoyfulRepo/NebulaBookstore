@@ -22,7 +22,7 @@ public class AuthorService {
         return (List<Author>) authorRepository.findAll();
     }
 
-    public Optional<Author> findById(Long id) {
+    public Optional<Author> findById(Integer id) {
         return authorRepository.findById(id);
     }
 
@@ -31,7 +31,7 @@ public class AuthorService {
     }
 
     // Delete
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Integer id) {
         Optional<Author> authorOptional = authorRepository.findById(id);
         if (authorOptional.isPresent()) {
             authorRepository.deleteById(id);
@@ -42,7 +42,7 @@ public class AuthorService {
     }
 
     // Update
-    public Author updateBio(Long id, String bio) {
+    public Author updateBio(Integer id, String bio) {
         Optional<Author> authorOptional = authorRepository.findById(id);
         if (authorOptional.isPresent()) {
             Author author = authorOptional.get();

@@ -50,7 +50,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BookID")
-    private Long id;
+    private Integer id;
 
     @NotBlank
     @Size(max = 200)

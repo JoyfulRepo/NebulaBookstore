@@ -32,7 +32,7 @@ public class Discount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DiscountID")
-    private Long id;
+    private Integer id;
 
     @NotNull
     @Column(name = "StartDate", nullable = false)

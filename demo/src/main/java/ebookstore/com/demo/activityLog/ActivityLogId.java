@@ -5,7 +5,15 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Embeddable
 public class ActivityLogId implements Serializable {
 
@@ -14,14 +22,6 @@ public class ActivityLogId implements Serializable {
 
     @Column(name = "CustomerID")
     private Long customerId;
-
-    public ActivityLogId() {
-    }
-
-    public ActivityLogId(Long logId, Long customerId) {
-        this.logId = logId;
-        this.customerId = customerId;
-    }
 
     // Getters and Setters
 

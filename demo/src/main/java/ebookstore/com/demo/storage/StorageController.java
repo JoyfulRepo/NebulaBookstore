@@ -35,7 +35,7 @@ public class StorageController {
 
     // Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStorageById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteStorageById(@PathVariable Integer id) {
         boolean isDeleted = storageService.deleteById(id);
         if (isDeleted)
             return ResponseEntity.noContent().build();
@@ -45,7 +45,7 @@ public class StorageController {
 
     // Get
     @GetMapping("/{id}")
-    public ResponseEntity<Storage> getStorageById(@PathVariable Long id) {
+    public ResponseEntity<Storage> getStorageById(@PathVariable Integer id) {
         return storageService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
@@ -53,7 +53,7 @@ public class StorageController {
 
     // Update
     @PutMapping("/{id}/capacity")
-    public ResponseEntity<Storage> updateStorageCapacity(@PathVariable Long id, @RequestParam Integer capacity) {
+    public ResponseEntity<Storage> updateStorageCapacity(@PathVariable Integer id, @RequestParam Integer capacity) {
         try {
             Storage updatedStorage = storageService.updateCapacity(id, capacity);
             return ResponseEntity.ok(updatedStorage);

@@ -9,7 +9,7 @@ import ebookstore.com.demo.order.Order.PaymentStatus;
 import ebookstore.com.demo.order.Order.Status;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     List<Order> findByStatus(Status status);
 

@@ -22,12 +22,12 @@ public class StorageService {
         return (List<Storage>) storageRepository.findAll();
     }
 
-    public Optional<Storage> findById(Long id) {
+    public Optional<Storage> findById(Integer id) {
         return storageRepository.findById(id);
     }
 
     // Delete
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Integer id) {
         Optional<Storage> storageOptional = storageRepository.findById(id);
         if (storageOptional.isPresent()) {
             storageRepository.deleteById(id);
@@ -38,7 +38,7 @@ public class StorageService {
     }
 
     // Update
-    public Storage updateCapacity(Long id, Integer capacity) {
+    public Storage updateCapacity(Integer id, Integer capacity) {
         Optional<Storage> storageOptional = storageRepository.findById(id);
         if (storageOptional.isPresent()) {
             Storage storage = storageOptional.get();

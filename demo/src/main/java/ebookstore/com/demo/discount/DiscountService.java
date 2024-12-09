@@ -24,12 +24,12 @@ public class DiscountService {
         return (List<Discount>) discountRepository.findAll();
     }
 
-    public Optional<Discount> findById(Long id) {
+    public Optional<Discount> findById(Integer id) {
         return discountRepository.findById(id);
     }
 
     // Delete
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Integer id) {
         Optional<Discount> discountOptional = discountRepository.findById(id);
         if (discountOptional.isPresent()) {
             discountRepository.deleteById(id);
@@ -40,7 +40,7 @@ public class DiscountService {
     }
 
     // Update
-    public Discount updateEndDate(Long id, LocalDate endDate) {
+    public Discount updateEndDate(Integer id, LocalDate endDate) {
         Optional<Discount> discountOptional = discountRepository.findById(id);
         if (discountOptional.isPresent()) {
             Discount discount = discountOptional.get();
@@ -51,7 +51,7 @@ public class DiscountService {
         }
     }
 
-    public Discount updateAmount(Long id, BigDecimal amount) {
+    public Discount updateAmount(Integer id, BigDecimal amount) {
         Optional<Discount> discountOptional = discountRepository.findById(id);
         if (discountOptional.isPresent()) {
             Discount discount = discountOptional.get();

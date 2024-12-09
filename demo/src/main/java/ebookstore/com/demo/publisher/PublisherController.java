@@ -35,7 +35,7 @@ public class PublisherController {
 
     // Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePublisherById(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePublisherById(@PathVariable Integer id) {
         boolean isDeleted = publisherService.deleteById(id);
         if (isDeleted)
             return ResponseEntity.noContent().build();
@@ -45,7 +45,7 @@ public class PublisherController {
 
     // Get
     @GetMapping("/{id}")
-    public ResponseEntity<Publisher> getPublisherById(@PathVariable Long id) {
+    public ResponseEntity<Publisher> getPublisherById(@PathVariable Integer id) {
         return publisherService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
@@ -62,7 +62,7 @@ public class PublisherController {
 
     // Update
     @PutMapping("/{id}/address")
-    public ResponseEntity<Publisher> updatePublisherAddress(@PathVariable Long id, @RequestParam String address) {
+    public ResponseEntity<Publisher> updatePublisherAddress(@PathVariable Integer id, @RequestParam String address) {
         try {
             Publisher publisher = publisherService.updateAddress(id, address);
             return ResponseEntity.ok(publisher);
@@ -72,7 +72,7 @@ public class PublisherController {
     }
 
     @PutMapping("/{id}/phoneNumber")
-    public ResponseEntity<Publisher> updatePublisherPhoneNumber(@PathVariable Long id,
+    public ResponseEntity<Publisher> updatePublisherPhoneNumber(@PathVariable Integer id,
             @RequestParam String phoneNumber) {
         try {
             Publisher publisher = publisherService.updatePhoneNumber(id, phoneNumber);

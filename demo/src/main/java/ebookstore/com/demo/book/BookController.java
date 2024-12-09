@@ -38,7 +38,7 @@ public class BookController {
 
     // Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBookById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBookById(@PathVariable Integer id) {
         boolean isDeleted = bookService.deleteById(id);
         if (isDeleted)
             return ResponseEntity.noContent().build();
@@ -48,7 +48,7 @@ public class BookController {
 
     // Get
     @GetMapping("/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable Long id) {
+    public ResponseEntity<Book> getBookById(@PathVariable Integer id) {
         return bookService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
@@ -83,7 +83,7 @@ public class BookController {
 
     // Update
     @PutMapping("/{id}/quantity")
-    public ResponseEntity<Book> updateBookQuantity(@PathVariable Long id, @RequestParam Integer quantity) {
+    public ResponseEntity<Book> updateBookQuantity(@PathVariable Integer id, @RequestParam Integer quantity) {
         try {
             Book updatedBook = bookService.updateQuantity(id, quantity);
             return ResponseEntity.ok(updatedBook);
@@ -93,7 +93,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}/price")
-    public ResponseEntity<Book> updateBookPrice(@PathVariable Long id, @RequestParam Double price) {
+    public ResponseEntity<Book> updateBookPrice(@PathVariable Integer id, @RequestParam Double price) {
         try {
             Book updatedBook = bookService.updatePrice(id, price);
             return ResponseEntity.ok(updatedBook);
@@ -103,7 +103,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}/status")
-    public ResponseEntity<Book> updateBookStatus(@PathVariable Long id, @RequestParam BookStatus status) {
+    public ResponseEntity<Book> updateBookStatus(@PathVariable Integer id, @RequestParam BookStatus status) {
         try {
             Book updatedBook = bookService.updateStatus(id, status);
             return ResponseEntity.ok(updatedBook);
@@ -114,7 +114,7 @@ public class BookController {
 
     // Associate Author
     @PutMapping("/{bookId}/authors/{authorId}")
-    public ResponseEntity<Book> addAuthorToBook(@PathVariable Long bookId, @PathVariable Long authorId) {
+    public ResponseEntity<Book> addAuthorToBook(@PathVariable Integer bookId, @PathVariable Integer authorId) {
         try {
             Book updatedBook = bookService.addAuthor(bookId, authorId);
             return ResponseEntity.ok(updatedBook);
@@ -125,7 +125,7 @@ public class BookController {
 
     // Associate Genre
     @PutMapping("/{bookId}/genres/{genreId}")
-    public ResponseEntity<Book> addGenreToBook(@PathVariable Long bookId, @PathVariable Long genreId) {
+    public ResponseEntity<Book> addGenreToBook(@PathVariable Integer bookId, @PathVariable Integer genreId) {
         try {
             Book updatedBook = bookService.addGenre(bookId, genreId);
             return ResponseEntity.ok(updatedBook);
@@ -136,7 +136,7 @@ public class BookController {
 
     // Associate Publisher
     @PutMapping("/{bookId}/publisher/{publisherId}")
-    public ResponseEntity<Book> setPublisherForBook(@PathVariable Long bookId, @PathVariable Long publisherId) {
+    public ResponseEntity<Book> setPublisherForBook(@PathVariable Integer bookId, @PathVariable Integer publisherId) {
         try {
             Book updatedBook = bookService.setPublisher(bookId, publisherId);
             return ResponseEntity.ok(updatedBook);
@@ -147,7 +147,7 @@ public class BookController {
 
     // Full Update
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book) {
+    public ResponseEntity<Book> updateBook(@PathVariable Integer id, @RequestBody Book book) {
         try {
             Book updatedBook = bookService.updateBook(id, book);
             return ResponseEntity.ok(updatedBook);

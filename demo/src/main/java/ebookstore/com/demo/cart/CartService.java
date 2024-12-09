@@ -63,7 +63,7 @@ public class CartService {
         }
     }
 
-    public Cart addBookToCart(CartId cartId, Long bookId) {
+    public Cart addBookToCart(CartId cartId, Integer bookId) {
         Cart cart = cartRepository.findById(cartId)
                 .orElseThrow(() -> new RuntimeException("Cart not found with id: " + cartId));
         Book book = bookRepository.findById(bookId)
@@ -86,10 +86,10 @@ public class CartService {
     private Order createOrderFromCart(Cart cart, String destination, Order.PaymentMethod paymentMethod) {
         Order order = new Order();
         order.setOrderDate(LocalDate.now());
-        order.setDestination(destination); // Set the actual destination
+        order.setDestination(destination);
         order.setTotalAmount(calculateTotal(cart));
         order.setStatus(Order.Status.Pending);
-        order.setPaymentMethod(paymentMethod); // Set the actual payment method
+        order.setPaymentMethod(paymentMethod);
         order.setPaymentStatus(Order.PaymentStatus.Unpaid);
         order.setCustomer(cart.getCustomer());
         order.setCart(cart);

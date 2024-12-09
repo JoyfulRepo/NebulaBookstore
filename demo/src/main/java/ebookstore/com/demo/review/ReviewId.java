@@ -5,27 +5,26 @@ import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Embeddable
 public class ReviewId implements Serializable {
 
     @Column(name = "ReviewID")
-    private Long reviewId;
+    private Integer reviewId;
 
     @Column(name = "CustomerID")
-    private Long customerId;
+    private Integer customerId;
 
     @Column(name = "BookID")
-    private Long bookId;
-
-    public ReviewId() {
-    }
-
-    public ReviewId(Long reviewId, Long customerId, Long bookId) {
-        this.reviewId = reviewId;
-        this.customerId = customerId;
-        this.bookId = bookId;
-    }
+    private Integer bookId;
 
     // Getters and Setters
 

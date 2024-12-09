@@ -41,7 +41,7 @@ public class OrderController {
 
     // Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOrderById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteOrderById(@PathVariable Integer id) {
         boolean isDeleted = orderService.deleteById(id);
         if (isDeleted)
             return ResponseEntity.noContent().build();
@@ -51,7 +51,7 @@ public class OrderController {
 
     // Get
     @GetMapping("/{id}")
-    public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
+    public ResponseEntity<Order> getOrderById(@PathVariable Integer id) {
         return orderService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
@@ -77,7 +77,7 @@ public class OrderController {
 
     // Update
     @PutMapping("/{id}/status")
-    public ResponseEntity<Order> updateOrderStatus(@PathVariable Long id, @RequestParam Status status) {
+    public ResponseEntity<Order> updateOrderStatus(@PathVariable Integer id, @RequestParam Status status) {
         try {
             Order updatedOrder = orderService.updateStatus(id, status);
             return ResponseEntity.ok(updatedOrder);
@@ -87,7 +87,7 @@ public class OrderController {
     }
 
     @PutMapping("/{id}/paymentStatus")
-    public ResponseEntity<Order> updateOrderPaymentStatus(@PathVariable Long id,
+    public ResponseEntity<Order> updateOrderPaymentStatus(@PathVariable Integer id,
             @RequestParam PaymentStatus paymentStatus) {
         try {
             Order updatedOrder = orderService.updatePaymentStatus(id, paymentStatus);
@@ -98,7 +98,7 @@ public class OrderController {
     }
 
     @PutMapping("/{id}/deliveryDate")
-    public ResponseEntity<Order> updateOrderDeliveryDate(@PathVariable Long id, @RequestParam String deliveryDate) {
+    public ResponseEntity<Order> updateOrderDeliveryDate(@PathVariable Integer id, @RequestParam String deliveryDate) {
         try {
             LocalDate parsedDate = LocalDate.parse(deliveryDate);
             Order updatedOrder = orderService.updateDeliveryDate(id, parsedDate);
@@ -109,7 +109,7 @@ public class OrderController {
     }
 
     @PutMapping("/{id}/destination")
-    public ResponseEntity<Order> updateOrderDestination(@PathVariable Long id, @RequestParam String destination) {
+    public ResponseEntity<Order> updateOrderDestination(@PathVariable Integer id, @RequestParam String destination) {
         try {
             Order updatedOrder = orderService.updateDestination(id, destination);
             return ResponseEntity.ok(updatedOrder);
@@ -119,7 +119,7 @@ public class OrderController {
     }
 
     @PutMapping("/{id}/total")
-    public ResponseEntity<Order> updateOrderTotal(@PathVariable Long id, @RequestParam BigDecimal total) {
+    public ResponseEntity<Order> updateOrderTotal(@PathVariable Integer id, @RequestParam BigDecimal total) {
         try {
             Order updatedOrder = orderService.updateTotal(id, total);
             return ResponseEntity.ok(updatedOrder);
@@ -129,7 +129,7 @@ public class OrderController {
     }
 
     @PutMapping("/{id}/paymentMethod")
-    public ResponseEntity<Order> updateOrderPaymentMethod(@PathVariable Long id,
+    public ResponseEntity<Order> updateOrderPaymentMethod(@PathVariable Integer id,
             @RequestParam PaymentMethod paymentMethod) {
         try {
             Order updatedOrder = orderService.updatePaymentMethod(id, paymentMethod);

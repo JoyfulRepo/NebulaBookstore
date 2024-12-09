@@ -37,7 +37,7 @@ public class DiscountController {
 
     // Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDiscountById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteDiscountById(@PathVariable Integer id) {
         boolean isDeleted = discountService.deleteById(id);
         if (isDeleted)
             return ResponseEntity.noContent().build();
@@ -47,7 +47,7 @@ public class DiscountController {
 
     // Get
     @GetMapping("/{id}")
-    public ResponseEntity<Discount> getDiscountById(@PathVariable Long id) {
+    public ResponseEntity<Discount> getDiscountById(@PathVariable Integer id) {
         return discountService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
@@ -55,7 +55,7 @@ public class DiscountController {
 
     // Update
     @PutMapping("/{id}/end-date")
-    public ResponseEntity<Discount> updateDiscountEndDate(@PathVariable Long id, @RequestParam String endDate) {
+    public ResponseEntity<Discount> updateDiscountEndDate(@PathVariable Integer id, @RequestParam String endDate) {
         try {
             LocalDate parsedDate = LocalDate.parse(endDate);
             Discount updatedDiscount = discountService.updateEndDate(id, parsedDate);
@@ -66,7 +66,7 @@ public class DiscountController {
     }
 
     @PutMapping("/{id}/amount")
-    public ResponseEntity<Discount> updateDiscountAmount(@PathVariable Long id, @RequestParam BigDecimal amount) {
+    public ResponseEntity<Discount> updateDiscountAmount(@PathVariable Integer id, @RequestParam BigDecimal amount) {
         try {
             Discount updatedDiscount = discountService.updateAmount(id, amount);
             return ResponseEntity.ok(updatedDiscount);

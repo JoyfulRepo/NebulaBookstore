@@ -22,7 +22,7 @@ public class PublisherService {
         return (List<Publisher>) publisherRepository.findAll();
     }
 
-    public Optional<Publisher> findById(Long id) {
+    public Optional<Publisher> findById(Integer id) {
         return publisherRepository.findById(id);
     }
 
@@ -31,7 +31,7 @@ public class PublisherService {
     }
 
     // Delete
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Integer id) {
         Optional<Publisher> publisherOptional = publisherRepository.findById(id);
         if (publisherOptional.isPresent()) {
             publisherRepository.deleteById(id);
@@ -42,7 +42,7 @@ public class PublisherService {
     }
 
     // Update
-    public Publisher updateAddress(Long id, String address) {
+    public Publisher updateAddress(Integer id, String address) {
         Optional<Publisher> publisherOptional = publisherRepository.findById(id);
         if (publisherOptional.isPresent()) {
             Publisher publisher = publisherOptional.get();
@@ -53,7 +53,7 @@ public class PublisherService {
         }
     }
 
-    public Publisher updatePhoneNumber(Long id, String phoneNumber) {
+    public Publisher updatePhoneNumber(Integer id, String phoneNumber) {
         Optional<Publisher> publisherOptional = publisherRepository.findById(id);
         if (publisherOptional.isPresent()) {
             Publisher publisher = publisherOptional.get();

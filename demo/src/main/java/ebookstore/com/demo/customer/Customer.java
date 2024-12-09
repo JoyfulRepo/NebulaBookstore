@@ -42,7 +42,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CustomerID")
-    private Long id;
+    private Integer id;
 
     @NotBlank
     @Size(max = 50)

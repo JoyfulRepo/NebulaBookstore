@@ -38,7 +38,7 @@ public class CustomerController {
     }
 
     @PostMapping("/{customerId}/books/{bookId}/reviews")
-    public ResponseEntity<Review> addReview(@PathVariable Long customerId, @PathVariable Long bookId,
+    public ResponseEntity<Review> addReview(@PathVariable Integer customerId, @PathVariable Integer bookId,
             @RequestParam Integer rating, @RequestParam String comment) {
         try {
             Review review = customerService.addReview(bookId, customerId, rating, comment);
@@ -50,7 +50,7 @@ public class CustomerController {
 
     // Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCustomerById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCustomerById(@PathVariable Integer id) {
         boolean isDeleted = customerService.deleteById(id);
         if (isDeleted)
             return ResponseEntity.noContent().build();
@@ -60,7 +60,7 @@ public class CustomerController {
 
     // Get
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
+    public ResponseEntity<Customer> getCustomerById(@PathVariable Integer id) {
         return customerService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
@@ -77,7 +77,7 @@ public class CustomerController {
 
     // Update
     @PutMapping("/{id}/email")
-    public ResponseEntity<Customer> updateCustomerEmail(@PathVariable Long id, @RequestParam String email) {
+    public ResponseEntity<Customer> updateCustomerEmail(@PathVariable Integer id, @RequestParam String email) {
         try {
             Customer updatedCustomer = customerService.updateEmail(id, email);
             return ResponseEntity.ok(updatedCustomer);
@@ -87,7 +87,8 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}/phone")
-    public ResponseEntity<Customer> updateCustomerPhoneNumber(@PathVariable Long id, @RequestParam String phoneNumber) {
+    public ResponseEntity<Customer> updateCustomerPhoneNumber(@PathVariable Integer id,
+            @RequestParam String phoneNumber) {
         try {
             Customer updatedCustomer = customerService.updatePhoneNumber(id, phoneNumber);
             return ResponseEntity.ok(updatedCustomer);
@@ -97,7 +98,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}/password")
-    public ResponseEntity<Customer> updateCustomerPassword(@PathVariable Long id, @RequestParam String password) {
+    public ResponseEntity<Customer> updateCustomerPassword(@PathVariable Integer id, @RequestParam String password) {
         try {
             Customer updatedCustomer = customerService.updatePassword(id, password);
             return ResponseEntity.ok(updatedCustomer);
@@ -107,7 +108,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{customerId}/cart/books/{bookId}")
-    public ResponseEntity<Cart> addBookToCart(@PathVariable Long customerId, @PathVariable Long bookId) {
+    public ResponseEntity<Cart> addBookToCart(@PathVariable Integer customerId, @PathVariable Integer bookId) {
         try {
             Cart updatedCart = customerService.addBookToCart(customerId, bookId);
             return ResponseEntity.ok(updatedCart);
@@ -117,7 +118,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
+    public ResponseEntity<Customer> updateCustomer(@PathVariable Integer id, @RequestBody Customer customer) {
         try {
             Customer updatedCustomer = customerService.updateCustomer(id, customer);
             return ResponseEntity.ok(updatedCustomer);

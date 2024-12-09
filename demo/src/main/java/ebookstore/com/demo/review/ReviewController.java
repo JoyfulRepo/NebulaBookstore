@@ -61,7 +61,7 @@ public class ReviewController {
     }
 
     @GetMapping("/book/{bookId}")
-    public ResponseEntity<List<Review>> getReviewsByBookId(@PathVariable Long bookId) {
+    public ResponseEntity<List<Review>> getReviewsByBookId(@PathVariable Integer bookId) {
         List<Review> reviews = reviewService.findByBookId(bookId);
         if (reviews.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

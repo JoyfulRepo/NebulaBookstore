@@ -35,7 +35,7 @@ public class GenreController {
 
     // Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteGenreById(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteGenreById(@PathVariable Integer id) {
         boolean isDeleted = genreService.deleteById(id);
         if (isDeleted)
             return ResponseEntity.noContent().build();
@@ -45,7 +45,7 @@ public class GenreController {
 
     // Get
     @GetMapping("/{id}")
-    public ResponseEntity<Genre> getGenreById(@PathVariable Long id) {
+    public ResponseEntity<Genre> getGenreById(@PathVariable Integer id) {
         return genreService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
@@ -62,7 +62,7 @@ public class GenreController {
 
     // Update
     @PutMapping("/{id}/name")
-    public ResponseEntity<Genre> updateGenreName(@PathVariable Long id, @RequestParam String name) {
+    public ResponseEntity<Genre> updateGenreName(@PathVariable Integer id, @RequestParam String name) {
         try {
             Genre genre = genreService.updateName(id, name);
             return ResponseEntity.ok(genre);

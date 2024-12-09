@@ -37,7 +37,7 @@ public class CartController {
     }
 
     @PostMapping("/{cartId}/{customerId}/cart")
-    public ResponseEntity<Order> finalizeCart(@PathVariable Long cartId, @PathVariable Long customerId,
+    public ResponseEntity<Order> finalizeCart(@PathVariable Integer cartId, @PathVariable Integer customerId,
             @RequestParam String destination,
             @RequestParam Order.PaymentMethod paymentMethod) {
         CartId id = new CartId(cartId, customerId);
@@ -47,7 +47,7 @@ public class CartController {
 
     // Delete
     @DeleteMapping("/{cartId}/{customerId}")
-    public ResponseEntity<Void> deleteCartById(@PathVariable Long cartId, @PathVariable Long customerId) {
+    public ResponseEntity<Void> deleteCartById(@PathVariable Integer cartId, @PathVariable Integer customerId) {
         CartId id = new CartId(cartId, customerId);
         boolean isDeleted = cartService.deleteById(id);
         if (isDeleted)
@@ -58,7 +58,7 @@ public class CartController {
 
     // Get
     @GetMapping("/{cartId}/{customerId}")
-    public ResponseEntity<Cart> getCartById(@PathVariable Long cartId, @PathVariable Long customerId) {
+    public ResponseEntity<Cart> getCartById(@PathVariable Integer cartId, @PathVariable Integer customerId) {
         CartId id = new CartId(cartId, customerId);
         return cartService.findById(id)
                 .map(ResponseEntity::ok)
@@ -67,7 +67,7 @@ public class CartController {
 
     // Update
     @PutMapping("/{cartId}/{customerId}/update")
-    public ResponseEntity<Cart> updateCartLastUpdated(@PathVariable Long cartId, @PathVariable Long customerId,
+    public ResponseEntity<Cart> updateCartLastUpdated(@PathVariable Integer cartId, @PathVariable Integer customerId,
             @RequestParam String lastUpdated) {
         try {
             LocalDate parsedDate = LocalDate.parse(lastUpdated);
@@ -81,8 +81,8 @@ public class CartController {
 
     // Add Book to Cart
     @PutMapping("/{cartId}/{customerId}/books/{bookId}")
-    public ResponseEntity<Cart> addBookToCart(@PathVariable Long cartId, @PathVariable Long customerId,
-            @PathVariable Long bookId) {
+    public ResponseEntity<Cart> addBookToCart(@PathVariable Integer cartId, @PathVariable Integer customerId,
+            @PathVariable Integer bookId) {
         try {
             CartId id = new CartId(cartId, customerId);
             Cart updatedCart = cartService.addBookToCart(id, bookId);

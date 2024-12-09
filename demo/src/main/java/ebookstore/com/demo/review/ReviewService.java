@@ -28,7 +28,7 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
-    public Review addReview(Long bookId, Long customerId, Integer rating, String comment) {
+    public Review addReview(Integer bookId, Integer customerId, Integer rating, String comment) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
         Customer customer = customerRepository.findById(customerId)
@@ -52,7 +52,7 @@ public class ReviewService {
         return reviewRepository.findByRating(rating);
     }
 
-    public List<Review> findByBookId(Long bookId) {
+    public List<Review> findByBookId(Integer bookId) {
         return reviewRepository.findByBookId(bookId);
     }
 

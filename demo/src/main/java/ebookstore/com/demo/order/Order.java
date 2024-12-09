@@ -43,7 +43,7 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "OrderID")
-    private Long id;
+    private Integer id;
 
     @NotNull
     @Column(name = "OrderDate", nullable = false)

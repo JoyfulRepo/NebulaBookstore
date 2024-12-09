@@ -35,7 +35,7 @@ public class BookService {
     }
 
     // Associate Author
-    public Book addAuthor(Long bookId, Long authorId) {
+    public Book addAuthor(Integer bookId, Integer authorId) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
         Author author = authorRepository.findById(authorId)
@@ -45,7 +45,7 @@ public class BookService {
     }
 
     // Associate Genre
-    public Book addGenre(Long bookId, Long genreId) {
+    public Book addGenre(Integer bookId, Integer genreId) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
         Genre genre = genreRepository.findById(genreId)
@@ -55,7 +55,7 @@ public class BookService {
     }
 
     // Associate Publisher
-    public Book setPublisher(Long bookId, Long publisherId) {
+    public Book setPublisher(Integer bookId, Integer publisherId) {
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new RuntimeException("Book not found with id: " + bookId));
         Publisher publisher = publisherRepository.findById(publisherId)
@@ -69,7 +69,7 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Optional<Book> findById(Long id) {
+    public Optional<Book> findById(Integer id) {
         return bookRepository.findById(id);
     }
 
@@ -86,7 +86,7 @@ public class BookService {
     }
 
     // Delete
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Integer id) {
         Optional<Book> bookOptional = bookRepository.findById(id);
         if (bookOptional.isPresent()) {
             bookRepository.deleteById(id);
@@ -97,7 +97,7 @@ public class BookService {
     }
 
     // Update
-    public Book updateQuantity(Long id, Integer quantity) {
+    public Book updateQuantity(Integer id, Integer quantity) {
         Optional<Book> bookOptional = bookRepository.findById(id);
         if (bookOptional.isPresent()) {
             Book book = bookOptional.get();
@@ -108,7 +108,7 @@ public class BookService {
         }
     }
 
-    public Book updatePrice(Long id, Double price) {
+    public Book updatePrice(Integer id, Double price) {
         Optional<Book> bookOptional = bookRepository.findById(id);
         if (bookOptional.isPresent()) {
             Book book = bookOptional.get();
@@ -119,7 +119,7 @@ public class BookService {
         }
     }
 
-    public Book updateStatus(Long id, BookStatus status) {
+    public Book updateStatus(Integer id, BookStatus status) {
         Optional<Book> bookOptional = bookRepository.findById(id);
         if (bookOptional.isPresent()) {
             Book book = bookOptional.get();
@@ -131,7 +131,7 @@ public class BookService {
     }
 
     // Full Update
-    public Book updateBook(Long id, Book book) {
+    public Book updateBook(Integer id, Book book) {
         Optional<Book> bookOptional = bookRepository.findById(id);
         if (bookOptional.isPresent()) {
             Book updatedBook = bookOptional.get();

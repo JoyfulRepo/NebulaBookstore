@@ -18,10 +18,10 @@ import lombok.Setter;
 public class CartId implements Serializable {
 
     @Column(name = "CartID")
-    private Long cartId;
+    private Integer cartId;
 
     @Column(name = "CustomerID")
-    private Long customerId;
+    private Integer customerId;
 
     // Getters and Setters
 

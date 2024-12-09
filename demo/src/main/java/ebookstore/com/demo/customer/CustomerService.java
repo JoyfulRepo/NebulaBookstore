@@ -38,11 +38,11 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Review addReview(Long bookId, Long customerId, Integer rating, String comment) {
+    public Review addReview(Integer bookId, Integer customerId, Integer rating, String comment) {
         return reviewService.addReview(bookId, customerId, rating, comment);
     }
 
-    public Cart addBookToCart(Long customerId, Long bookId) {
+    public Cart addBookToCart(Integer customerId, Integer bookId) {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + customerId));
         Book book = bookRepository.findById(bookId)
@@ -62,7 +62,7 @@ public class CustomerService {
         return (List<Customer>) customerRepository.findAll();
     }
 
-    public Optional<Customer> findById(Long id) {
+    public Optional<Customer> findById(Integer id) {
         return customerRepository.findById(id);
     }
 
@@ -71,7 +71,7 @@ public class CustomerService {
     }
 
     // Delete
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Integer id) {
         Optional<Customer> customerOptional = customerRepository.findById(id);
         if (customerOptional.isPresent()) {
             customerRepository.deleteById(id);
@@ -82,7 +82,7 @@ public class CustomerService {
     }
 
     // Update
-    public Customer updateEmail(Long id, String email) {
+    public Customer updateEmail(Integer id, String email) {
         Optional<Customer> customerOptional = customerRepository.findById(id);
         if (customerOptional.isPresent()) {
             Customer customer = customerOptional.get();
@@ -93,7 +93,7 @@ public class CustomerService {
         }
     }
 
-    public Customer updatePhoneNumber(Long id, String phoneNumber) {
+    public Customer updatePhoneNumber(Integer id, String phoneNumber) {
         Optional<Customer> customerOptional = customerRepository.findById(id);
         if (customerOptional.isPresent()) {
             Customer customer = customerOptional.get();
@@ -104,7 +104,7 @@ public class CustomerService {
         }
     }
 
-    public Customer updatePassword(Long id, String password) {
+    public Customer updatePassword(Integer id, String password) {
         Optional<Customer> customerOptional = customerRepository.findById(id);
         if (customerOptional.isPresent()) {
             Customer customer = customerOptional.get();
@@ -115,7 +115,7 @@ public class CustomerService {
         }
     }
 
-    public Customer updateCustomer(Long id, Customer customer) {
+    public Customer updateCustomer(Integer id, Customer customer) {
         Optional<Customer> customerOptional = customerRepository.findById(id);
         if (customerOptional.isPresent()) {
             Customer updatedCustomer = customerOptional.get();
